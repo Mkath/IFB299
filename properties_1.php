@@ -36,7 +36,11 @@
 			<div id="secondContent"> 
 
 				<h1>Search Result Page or List Properties page</h1>
-				<p> < 1 2 3 > </p>
+				<p> 
+					<?php
+            					include "results.inc";
+          				?>
+          			</p>
 				<img src="images/room1.jpg" width="400" height="160" alt="room1" /> 
 				<h3>Inspection Time</h3>
 				<p> 15 September 2015  12:00 - 12:15</p>
