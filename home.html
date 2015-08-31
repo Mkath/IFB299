@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Welcome to Rent property </title>
     <link href="main_9.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="main_javascript.js"></script>
 </head>
 
 <body>
@@ -34,46 +35,62 @@
 
 	<div id="bigContent">
 			<div id="secondContent"> 
+				<div id="searchForm">
 
-				<form action="">	
-				<br>	
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Search Properties:<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" name="venuename" notrequired placeholder="Enter sate or postcode" size = "50" maxlength = "100">
-				<br>
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="house" checked>House
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="apartmentunit">Apartment & Unit
-				<br>
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="oneroom">One room	
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="tworoom" checked>Two room
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="threeroom">Three room
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="fourroomandmore">Four room and more
-				<br>
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="furnished">furnished
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="unfurnishedtype" value="unfurnished">unfurnished
-				<br>
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="100to200" value="price1"> price between $100 to $200 per week
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="201to300" value="price1"> price between $201 to $300 per week
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="301to400" value="price1"> price between $301 to $400 per week
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="301to400" value="price1"> price between $401 to $1000 per week
-				<br>
-				<br>
-				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" value="Submit" onclick="return val();"/>
+	  				<form name="Search" onsubmit="return validate(Search)" method="GET" action="properties_1.php">
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Search Properties:<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" name="venuename" notrequired placeholder="Enter Suburb" size = "50" maxlength = "100" onkeypress="invisible('suburbMissing')">
+	          			<br>
+	          			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="suburbMissing" style="color:red; visibility:hidden">*'Suburb' is a required field</span>
+	  				<br>
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="House" checked>House
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="Apartment">Apartment And Unit
+	  				<br>
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="1">One room
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="2" checked>Two room
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="3">Three room
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="4">Four room and more
+	  				<br>
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="Yes" checked>furnished
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="No">unfurnished
+	  				<br>
+				        <br>
+				        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Minumum Rent per Week
+				        <select name="min">
+				          <option value="0">Min</option>
+				          <option value="99">$100</option>
+				          <option value="200">$200</option>
+				          <option value="300">$300</option>
+				          <option value="400">$400</option>
+				        </select>
+				  	<br>
+				        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Maximum Rent per Week
+				        <select name="max">
+					        <option value="1500">Max</option>
+					        <option value="200">$200</option>
+					        <option value="300">$300</option>
+					        <option value="400">$400</option>
+					        <option value="1000">$1000</option>
+				        </select>
+			        </div> <!--searchForm -->
+			        <br>
+			        <br>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" value="Search" onclick="return val();"/>
 				&nbsp; &nbsp; &nbsp; &nbsp; <input type="reset" value="Reset"/>
 				<br>
 				<br>
 				</form>
+
+				
 				<h1>About Us</h1>
 				<p>
 				At Rental Service Estate Agents, we aim to be the best. We strive to shine in every area of our business, continually reinventing ourselves as we find better ways to achieve our clients' goals. We are a learning organisation. We regularly review our structure, systems and processes, asking ourselves: How can we improve our service to our clients?
