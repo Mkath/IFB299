@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-            <script type="text/javascript" src="path/to/jquery.js"></script>
-            <script type="text/javascript" src="path/to/jquery.nailthumb.1.0.js"></script>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 
@@ -67,7 +66,7 @@ $p_id = $_GET['ID'];
 				// loops through each of the images found and displays them on the top
 					foreach ($recordimages as $image)
 					{
-						echo '<a href="/images/', $image['image_path'],'">';
+						echo '<a href="/images/', $image['image_path'],'" target="_blank" >';
 						echo '<img style="float: left; margin: 15px 15px 15px 15px; width: 150px;height: 100px;border:0" src="/images/',$image['image_path'], '" alt="', $image['image_decription'], '">';
 						echo '</a>';
 					}
@@ -89,9 +88,11 @@ $p_id = $_GET['ID'];
 			// loops through all the property information and adds them to the page with their tags
 				foreach ($recordset as $record)
 				{
+					
 					echo "<h1>$",$record['rent_amt'], " Weekly</h1>";
 					echo "<h3>",$record['street_address'],", ",$record['suburb'],  "</h3>";
-					echo '<p><input class="submit_button" type="submit" value="Book Inspection"> <input class="submit_button" type="submit" value="Favourite this page"></p>';
+					echo '<p><input class="submit_button" type="submit" value="Book Inspection"> <input class="submit_button" type="submit" value="Favourite this page"> </p>';
+					echo '<p><a href="',$record['gumtree_url'],'" target="_blank">View property on gumtree</a></p>';
 					echo "<hr></hr>";
 					echo '<p><b>Inspection times:</b>', "</p>";
 					echo "<p>", $record['inspection_time1'], '</p>';

@@ -16,8 +16,12 @@
   $max_rent = $_GET["max"];
   $furnished = $_GET["furnishedtype"];
 
+  //these lines set up the table for which to display the results
+  echo '<table id = "results_table" border = "1">';
+  echo '<td>Property ID</td><td>Suburb</td><td>Rent Per Week</td><td>Property Type</td><tr>';
+
   //this connects to the mysql database
-  $conn = new PDO("mysql:host=localhost;dbname=property_management", 'root', '6Chain9123');
+  $conn = new PDO("mysql:host=localhost;dbname=property", 'root', '');
 
   //this retreives all the data from the table in mysql.
   //It then selects only the rows of information in which all the specified information
@@ -44,18 +48,7 @@
   {
     if($row != $last)
     {
-      $property_id = $row['propertyid'];
-      $conn2 = new PDO("mysql:host=localhost;dbname=property_management", 'root', '6Chain9123');
-      $stmt2 = $conn2->prepare('SELECT * FROM `property_images` WHERE `propertyid` = :pid');
-      $stmt2->bindParam(':pid', $property_id, PDO::PARAM_STR);
-      $stmt2->execute();
-	  
-
-		$last = "placeholder";
-      foreach($stmt2 as $result)
-      {
-        echo '<img src="images/', $result['image_path'], '" />';
-      }
+      echo '<td>', $row['propertyid'], '<td>', $row['suburb'], '<td>', $row['rent_amt'], '<td>', $row['property_type'], '<tr>';
     }
   }
 ?>
