@@ -44,24 +44,40 @@
 	          			<br>
 	          			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="suburbMissing" style="color:red; visibility:hidden">*'Suburb' is a required field</span>
 	  				<br>
-	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="house" checked>House
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="ANY" checked="checked">Any
+					<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="house">House
 	  				<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="unit">Apartment And Unit
 	  				<br>
-	  				<br>
+					<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="ANY" checked="checked">Any
+					<br>				
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="1">One room
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="2" checked>Two room
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="2">Two rooms
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="3">Three room
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="3">Three rooms
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="4">Four room and more
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="4">Four rooms and more
 	  				<br>
+					<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="ANY" checked="checked">Any
+					<br>				
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="1">One bathroom
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="TRUE" checked>furnished
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="2">Two bathrooms
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="FALSE">unfurnished
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="3">Three bathrooms
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="4">Four bathrooms and more
+	  				<br>	  				
+					<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="ANY" checked="checked">Any
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="TRUE">Furnished
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="FALSE">Unfurnished
 	  				<br>
 				        <br>
 				        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Minumum Rent per Week
@@ -75,15 +91,18 @@
 				  	<br>
 				        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Maximum Rent per Week
 				        <select name="max">
-					        <option value="1500">Max</option>
+					        <option value="Max">Max</option>
 					        <option value="200">$200</option>
 					        <option value="300">$300</option>
 					        <option value="400">$400</option>
-					        <option value="1000">$1000</option>
+					        <option value="400">$500</option>
+					        <option value="400">$600</option>
+					        <option value="400">$700</option>
+					        <option value="400">$800</option>
+					        <option value="400">$900</option>					        
+							<option value="1000">$1000</option>
 				        </select>
 			        </div> <!--searchForm -->
-			        <br>
-			        <br>
 				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" value="Search" onclick="return val();"/>
 				&nbsp; &nbsp; &nbsp; &nbsp; <input type="reset" value="Reset"/>
 				<br>

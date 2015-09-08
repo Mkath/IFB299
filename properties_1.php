@@ -54,6 +54,7 @@
 						  $min_rent = $_GET["min"];
 						  $max_rent = $_GET["max"];
 						  $furnished = $_GET["furnishedtype"];
+						  $bathrooms = $_GET["bathrooms"];
 
 						  //this connects to the mysql database
 						  $conn = new PDO("mysql:host=localhost;dbname=property_management", 'root', '6Chain9123');
@@ -61,17 +62,66 @@
 						  //this retreives all the data from the table in mysql.
 						  //It then selects only the rows of information in which all the specified information
 						  //from the search form are found.
-						  $stmt = $conn->prepare('SELECT * FROM `property_details` WHERE `property_type` = :ptype AND `suburb` = :suburb AND `rent_amt` < :maxrent
-						  AND `rent_amt` > :minrent AND `number_rooms` = :nrooms AND `furnished` = :furnishedtype ORDER BY `suburb`, `rent_amt`');
+						  
+						  
+						  //builds a dynamically generated sql statement based on the selected search criteria 
+						  $SQL="SELECT * FROM `property_details` WHERE UCASE(suburb) ='" .  strtoupper($suburb) . "'";
+						  
+						  
+						  if ($property_type != "ANY")
+						  {
+							  $SQL=$SQL . " AND `property_type` = '" . $property_type .  "'";
+						  }
+						  
+						  if ($room_number != "ANY")
+						  {
+							  if ( $room_number < 4)
+							  {
+							   $SQL=$SQL . " AND `number_rooms` = '" . $room_number .  "'";
+							  }
+							  else
+							  {
+								 $SQL=$SQL . " AND `number_rooms` >= '" . $room_number .  "'";
+							  }
+						  }
+						  
+						  if ($bathrooms != "ANY")
+						  {
+							 if ( $bathrooms < 4)
+							  {
+							   $SQL=$SQL . " AND `number_bathrooms` = '" . $bathrooms .  "'";
+							  }
+							  else
+							  {
+								 $SQL=$SQL . " AND `number_bathrooms` >= '" . $bathrooms .  "'";
+							  }
+						  }
 
-						  //the following lines combine local variables with the ones created in the above
-						  //statement. It then executes all prepared statments.
-						  $stmt->bindParam(':ptype', $property_type, PDO::PARAM_STR);
-						  $stmt->bindParam(':suburb', $suburb, PDO::PARAM_STR);
-						  $stmt->bindParam(':nrooms', $room_number, PDO::PARAM_STR);
-						  $stmt->bindParam(':maxrent', $max_rent, PDO::PARAM_STR);
-						  $stmt->bindParam(':minrent', $min_rent, PDO::PARAM_STR);
-						  $stmt->bindParam(':furnishedtype', $furnished, PDO::PARAM_STR);
+						  if ($furnished != "ANY")
+						  {
+							  $SQL=$SQL . " AND `furnished` = " . $furnished;
+						  }
+				
+						$SQL=$SQL . " AND `rent_amt` > " . $min_rent;
+							  
+						if ($max_rent != "Max")
+						{
+							$SQL=$SQL . " AND `rent_amt` <= " . $max_rent;
+						}						  
+										
+
+						if ($furnished != "ANY")
+						  {
+							  $SQL=$SQL . " AND `furnished` = " . $furnished;
+						  }		
+
+						  
+						  $SQL=$SQL . " ORDER BY suburb, rent_amt";
+						  
+						  echo $SQL;
+					  
+						  $stmt = $conn->prepare($SQL);
+
 						  $stmt->execute();
 
 						  //removes duplicates
