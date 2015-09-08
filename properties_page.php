@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
@@ -6,9 +5,9 @@
 $p_id = $_GET['ID'];
 
 	$dbhost 	= "localhost";
-	$dbname		= "property_management";
-	$dbuser		= "root";
-	$dbpass		= "6Chain9123";
+	$dbname		= "1008545";
+	$dbuser		= "1008545";
+	$dbpass		= "IFB299GROUP93";
 
 			try {
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);

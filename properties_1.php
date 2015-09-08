@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -55,9 +55,14 @@
 						  $max_rent = $_GET["max"];
 						  $furnished = $_GET["furnishedtype"];
 						  $bathrooms = $_GET["bathrooms"];
+						  
+						$dbhost 	= "localhost";
+						$dbname		= "1008545";
+						$dbuser		= "1008545";
+						$dbpass		= "IFB299GROUP93";						  
 
 						  //this connects to the mysql database
-						  $conn = new PDO("mysql:host=localhost;dbname=property_management", 'root', '6Chain9123');
+						  $conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 
 						  //this retreives all the data from the table in mysql.
 						  //It then selects only the rows of information in which all the specified information
@@ -118,7 +123,6 @@
 						  
 						  $SQL=$SQL . " ORDER BY suburb, rent_amt";
 						  
-						  echo $SQL;
 					  
 						  $stmt = $conn->prepare($SQL);
 
@@ -139,7 +143,10 @@
 							if($row != $last)
 							{
 							  $property_id = $row['propertyid'];
-							  $conn2 = new PDO("mysql:host=localhost;dbname=property_management", 'root', '6Chain9123');
+							  
+
+							  
+							  $conn2 = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 							  $stmt2 = $conn2->prepare('SELECT * FROM `property_images` WHERE `propertyid` = :pid');
 							  $stmt2->bindParam(':pid', $property_id, PDO::PARAM_STR);
 							  $stmt2->execute();
