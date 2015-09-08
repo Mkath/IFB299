@@ -79,7 +79,21 @@ FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 			</index>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
+
+
+		<table name="tenant_registration" >
+			<column name="tenantid" type="int" jt="4" mandatory="y" />
+			<column name="propertyid" type="int" jt="4" mandatory="y" />
+			<index name="pk_tenant_registration" unique="UNIQUE" >
+				<column name="tenantid" />
+			</index>
+			<index name="pk_tenant_registration_0" unique="UNIQUE" >
+				<column name="propertyid" />
+			</index>
+			<storage><![CDATA[engine=InnoDB]]></storage>
+		</table>
 */
+
 
 CREATE TABLE `tenant_details` (
 	`tenantid` int NOT NULL AUTO_INCREMENT,	
@@ -100,12 +114,20 @@ FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 CREATE TABLE `tenant_favourites` (
 	`tenantid` int NOT NULL,	
 	`propertyid` int NOT NULL,
-	`tenant_password` varchar(50) NOT NULL,	
   PRIMARY KEY (tenantid, propertyid),
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
 FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 );
 
+
+CREATE TABLE `tenant_registration` (
+	`tenantid` int NOT NULL,	
+	`propertyid` int NOT NULL,
+	`inspection_time` varchar(50) NOT NULL,	
+  PRIMARY KEY (tenantid, propertyid, inspection_time),
+FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
+FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
+);
 
 
 
