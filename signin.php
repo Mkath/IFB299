@@ -49,6 +49,8 @@
           </form><p>
           Don't Have an Account? <a href="tenant_registration.php">Sign Up</a>
           <?php
+		 
+
             //this function removes an unwanted characters from the suburb
             if (isset($_GET['username']) && isset($_REQUEST['password'])){
               function validate($field)
@@ -58,11 +60,24 @@
               $field = htmlspecialchars($field);
               return $field;
               }
+			/*
+				$dbhost 	= "localhost";
+				$dbname		= "1008545";
+				$dbuser		= "1008545";
+				$dbpass		= "IFB299GROUP93";
+			*/
+
+				$dbhost 	= "localhost";
+				$dbname		= "property_management";
+				$dbuser		= "root";
+				$dbpass		= "6Chain9123";			  
+			  
+			  
               //The following lines assign variables from the search form to local php variables
               $user_name = validate($_GET["username"]);
               $p_word = validate($_GET["password"]);
 
-              $conn = new PDO("mysql:host=localhost;dbname=property_management", 'root', '');
+              $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
               $stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = :pword');
 
               $stmt->bindParam(':uname', $user_name, PDO::PARAM_STR);
@@ -72,12 +87,23 @@
               foreach($stmt as $row)
 						  {
                 if ($row['tenant_username'] == $user_name && $row['tenant_password'] == $p_word){
-                  //echo "<script type='text/javascript'>alert('submitted successfully!')</script>";
-                  echo '<script type="text/javascript">';
-                  echo 'alert("submitted successfully");';
-                  echo 'window.location.href = "home.php";';
-                  echo '</script>';
-                  $nCounter = $nCounter+1;
+                
+				session_start();
+				$_SESSION['t_id'] = $row['tenantid'];
+				$_SESSION['FirstName'] = $row['tenant_firstname'];
+				
+
+				if (isset($_GET['prev']))
+				{
+					$prev_page = $_GET['prev'];
+				}
+				else
+				{
+					$prev_page ="home.php";
+				}
+				
+				header("location:  http://{$_SERVER['HTTP_HOST']}/$prev_page");
+                //$nCounter = $nCounter+1;
 
                 }
 
