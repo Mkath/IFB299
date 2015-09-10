@@ -4,10 +4,17 @@
 
 $p_id = $_GET['ID'];
 
+/*
 	$dbhost 	= "localhost";
 	$dbname		= "1008545";
 	$dbuser		= "1008545";
 	$dbpass		= "IFB299GROUP93";
+*/
+
+	$dbhost 	= "localhost";
+	$dbname		= "property_management";
+	$dbuser		= "root";
+	$dbpass		= "6Chain9123";
 
 			try {
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
@@ -30,7 +37,7 @@ $p_id = $_GET['ID'];
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Welcome to Rent property </title>
-    <link href="main_9.css" rel="stylesheet" type="text/css"/>
+    <link href="main_11.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>

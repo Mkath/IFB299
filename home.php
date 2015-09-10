@@ -1,5 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
-
+<?php
+	if(!isset($_SESSION)){
+    session_start();
+	}
+?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Welcome to Rent property </title>
@@ -19,7 +23,19 @@
 					<li><a href="home.php" class="current"> Home </a> </li>
 					<li><a href="properties_1.html" class="current"> Properties </a> </li>
 					<li><a href="contactus.html" class="current"> Contact us </a> </li>
-					<li><a href="signin.php" class="current"> Sign In </a> </li>
+					<?php 
+					if (isset($_SESSION['FirstName']) && isset($_SESSION['t_id']))
+					{
+						echo  '<li><a href="tenant_profile.php" class="current"> Profile </a> </li>';
+						echo  '<li><a href="signout.php" class="current"> Sign Out </a> </li>';
+						
+					}
+					else
+					{
+						echo  '<li><a href="signin.php" class="current"> Sign In </a> </li>';
+						
+					}
+					?>
 				</ul>
 			</div> <!--Menu -->
 
@@ -43,41 +59,36 @@
 	          			<br>
 	          			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="suburbMissing" style="color:red; visibility:hidden">*'Suburb' is a required field</span>
 	  				<br>
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="ANY" checked="checked">Any
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="type[]" value="House" checked="checked">House
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="type[]" value="Apartment">Apartment
+	  				<br>
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="type[]" value="Unit">Unit
+	  				<br>					
 					<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="house">House
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="roomnumber[]" checked="checked" value="1">One room
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="type" value="unit">Apartment And Unit
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="roomnumber[]" value="2">Two rooms
 	  				<br>
-					<br>
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="ANY" checked="checked">Any
-					<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="1">One room
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="roomnumber[]" value="3">Three rooms
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="2">Two rooms
-	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="3">Three rooms
-	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="4">Four rooms and more
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="roomnumber[]" value="4|More">Four rooms and more
 	  				<br>
 					<br>
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="ANY" checked="checked">Any
-					<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="1">One bathroom
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="bathrooms[]" checked="checked" value="1">One bathroom
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="2">Two bathrooms
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="bathrooms[]" value="2">Two bathrooms
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="3">Three bathrooms
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="bathrooms[]" value="3">Three bathrooms
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="4">Four bathrooms and more
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="bathrooms[]" value="4|More">Four bathrooms and more
 	  				<br>
 					<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="ANY" checked="checked">Any
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="furnishedtype[]" value="0" checked="checked">Unfurnished
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="TRUE">Furnished
+	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="furnishedtype[]" value="1">Furnished
 	  				<br>
-	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="FALSE">Unfurnished
-	  				<br>
+
 				        <br>
 				        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Minumum Rent per Week
 				        <select name="min">
@@ -128,6 +139,12 @@
 			</div>
 
 				<div id="news">
+					<?php
+					if ( isset($_SESSION['FirstName']))
+					{
+						echo "<BR><p>Welcome, ", $_SESSION['FirstName'], "</p>";
+					}
+					?>
 					<h3> News </h3>
 
 					<img src="images/watch1.png" width="200" height="160" alt="watch1" />
