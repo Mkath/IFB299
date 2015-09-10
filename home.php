@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -20,7 +18,8 @@
 				<ul>
 					<li><a href="home.html" class="current"> Home </a> </li>
 					<li><a href="properties_1.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>				
+					<li><a href="contactus.html" class="current"> Contact us </a> </li>
+					<li><a href="signin.php" class="current"> Sign In </a> </li>
 				</ul>
 			</div> <!--Menu -->
 			
