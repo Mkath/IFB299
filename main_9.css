@@ -25,7 +25,7 @@ div#header {
 	position: relative;
 }
 
-#hearder h1{
+#header h1{
 	font-size: 1.5em;
 	font-weight: bold;
 	color: #1b9d95;
@@ -65,14 +65,14 @@ div#bigContent {
 }
 
 #Menu li a:link, #Menu li a:visited {
-	
+
 	font-family: "Century Gothic";
 	display:block;
 	color:  2c2d29; /*deep green*/
 	font-weight: bold;
 	text-decoration: none;/*underline*/
-	padding: 0 15px 0 30px;
-	margin-right: 10px;
+	padding: 0 15px 0 10px;
+	margin-right: 0px;
 	line-height: 25px;
 	border: none;
 }
