@@ -97,7 +97,7 @@ FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 
 CREATE TABLE `tenant_details` (
 	`tenantid` int NOT NULL AUTO_INCREMENT,	
-	`propertyid` int NOT NULL,
+	`propertyid` int,
 	`tenant_firstname` varchar(50) NOT NULL,
 	`tenant_lastname` varchar(50) NOT NULL,	
 	`tenant_dob` date NOT NULL,
@@ -131,15 +131,6 @@ FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 
 
 
-
-
-
-
-
-
-
-
-
 insert into property_details (street_address,suburb,number_rooms,property_type,furnished,number_bathrooms,description,rent_amt,gumtree_url,inspection_time1,inspection_time2,posted)  values('123 Smith Street','Taringa',3,'unit',FALSE,1,'This house is a test, It features a number of different features.',320,'http://www.gumtree.com.au/s-ad/beaumaris/flatshare-houseshare/large-beach-side-house-king-bed-ensuite-pool-view-transport-/1085277833','15 September 2015 12:00 - 12:15','16 September 2015 12:15 - 12:30',FALSE);
 insert into property_details (street_address,suburb,number_rooms,property_type,furnished,number_bathrooms,description,rent_amt,gumtree_url,inspection_time1,inspection_time2,posted)  values('123 Fred Street','South Brisbane',2,'house',FALSE,1,'This house is a second test, It features a number of different features.',453,'http://www.gumtree.com.au/s-ad/penshurst/flatshare-houseshare/double-room-for-rent-in-quiet-street-close-to-station/1084216095','17 September 2015 1:00 - 1:15','18 September 2015 1:15 - 1:30',FALSE);
 
@@ -150,6 +141,9 @@ insert into property_images (propertyid, image_decription, image_path) values ('
 insert into property_images (propertyid, image_decription, image_path) values ('2', 'outside','room3.jpg');
 insert into property_images (propertyid, image_decription, image_path) values ('2', 'livingroom','room1.jpg');
 insert into property_images (propertyid, image_decription, image_path) values ('2', 'livingroom2','room4.jpg');
+
+insert into tenant_details (tenant_firstname, tenant_lastname, tenant_dob, tenant_phone, tenant_email, tenant_postal, tenant_username, tenant_password)  values ('Mike','Kath','1982-10-15','040499999','Chainber@hotmail.com','4068','mkath','pass123');
+
 
 
 
