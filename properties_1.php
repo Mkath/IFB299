@@ -17,15 +17,16 @@
 
 			<div id="Menu">
 				<ul>
-					<li><a href="home.html" class="current"> Home </a> </li>
+					<li><a href="home.php" class="current"> Home </a> </li>
 					<li><a href="properties.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>				
+					<li><a href="contactus.html" class="current"> Contact us </a> </li>
+          <li><a href="signin.php" class="current"> Sign In </a> </li>
 				</ul>
 			</div> <!--Menu -->
-			
+
 	</div> <!--header -->
 
-	
+
 	<div id="secondBanner">
 
 		<img src="images/house3.jpg" width="770" height="90" alt="welcome to Property Service"/>
@@ -33,10 +34,10 @@
 
 
 	<div id="bigContent">
-			<div id="secondContent"> 
+			<div id="secondContent">
 
 				<h1>Search Result</h1>
-				<p> 
+				<p>
 					<?php
 							//this function removes an unwanted characters from the suburb
 						  function validate($field)
@@ -55,11 +56,11 @@
 						  $max_rent = $_GET["max"];
 						  $furnished = $_GET["furnishedtype"];
 						  $bathrooms = $_GET["bathrooms"];
-						  
+
 						$dbhost 	= "localhost";
 						$dbname		= "1008545";
 						$dbuser		= "1008545";
-						$dbpass		= "IFB299GROUP93";						  
+						$dbpass		= "IFB299GROUP93";
 
 						  //this connects to the mysql database
 						  $conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
@@ -67,17 +68,17 @@
 						  //this retreives all the data from the table in mysql.
 						  //It then selects only the rows of information in which all the specified information
 						  //from the search form are found.
-						  
-						  
-						  //builds a dynamically generated sql statement based on the selected search criteria 
+
+
+						  //builds a dynamically generated sql statement based on the selected search criteria
 						  $SQL="SELECT * FROM `property_details` WHERE UCASE(suburb) ='" .  strtoupper($suburb) . "'";
-						  
-						  
+
+
 						  if ($property_type != "ANY")
 						  {
 							  $SQL=$SQL . " AND `property_type` = '" . $property_type .  "'";
 						  }
-						  
+
 						  if ($room_number != "ANY")
 						  {
 							  if ( $room_number < 4)
@@ -89,7 +90,7 @@
 								 $SQL=$SQL . " AND `number_rooms` >= '" . $room_number .  "'";
 							  }
 						  }
-						  
+
 						  if ($bathrooms != "ANY")
 						  {
 							 if ( $bathrooms < 4)
@@ -106,24 +107,24 @@
 						  {
 							  $SQL=$SQL . " AND `furnished` = " . $furnished;
 						  }
-				
+
 						$SQL=$SQL . " AND `rent_amt` > " . $min_rent;
-							  
+
 						if ($max_rent != "Max")
 						{
 							$SQL=$SQL . " AND `rent_amt` <= " . $max_rent;
-						}						  
-										
+						}
+
 
 						if ($furnished != "ANY")
 						  {
 							  $SQL=$SQL . " AND `furnished` = " . $furnished;
-						  }		
+						  }
 
-						  
+
 						  $SQL=$SQL . " ORDER BY suburb, rent_amt";
-						  
-					  
+
+
 						  $stmt = $conn->prepare($SQL);
 
 						  $stmt->execute();
@@ -137,20 +138,20 @@
 							echo 'No Results Found...';
 						  }
 						  else{
-							  
+
 						  foreach($stmt as $row)
 						  {
 							if($row != $last)
 							{
 							  $property_id = $row['propertyid'];
-							  
 
-							  
+
+
 							  $conn2 = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 							  $stmt2 = $conn2->prepare('SELECT * FROM `property_images` WHERE `propertyid` = :pid');
 							  $stmt2->bindParam(':pid', $property_id, PDO::PARAM_STR);
 							  $stmt2->execute();
-							  
+
 
 								$last = "placeholder";
 								$nCounter = 0;
@@ -160,7 +161,7 @@
 								{
 									echo '<a href="properties_page.php?ID=',$property_id, '">';
 									echo '<img width="400" height="160" src="/images/', $result['image_path'], '" /><p>';
-									
+
 									echo "<p>",$row['street_address'],", ",$row['suburb'],  "</p>";
 									echo '</a>';
 									echo '<h3>Inspection Time</h3>';
@@ -169,16 +170,16 @@
 									$nCounter = $nCounter+1;
 								}
 							  }
-							}	
+							}
 						  }
 						}
           			?>
-	
-			</div> 
+
+			</div>
 
 				<div id="news">
 
-	
+
 					<p class="clear"></p>
 
 				</div><!--news-->
@@ -189,7 +190,7 @@
 </div> <!--outside -->
 
 		<div id="footer">
-			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp; 
+			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp;
 				<a href="privacy.html"> Privacy Policy</a>
 				<a href="term.html"> Terms and Conditions</a>
 			</p>
@@ -197,4 +198,3 @@
 
 </body>
 </html>
-

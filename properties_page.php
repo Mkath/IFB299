@@ -18,13 +18,13 @@ $p_id = $_GET['ID'];
 					$recCount->execute();
 					$num_properties = $recCount->fetchColumn();
 				}
-				
+
 			catch(PDOException $e)
 				{
 					echo $e->getMessage();
 				}
 				$pdo = null;
-				
+
 ?>
 
 <head>
@@ -42,15 +42,16 @@ $p_id = $_GET['ID'];
 
 			<div id="Menu">
 				<ul>
-					<li><a href="home.html" class="current"> Home </a> </li>
+					<li><a href="home.php" class="current"> Home </a> </li>
 					<li><a href="properties.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>				
+					<li><a href="contactus.html" class="current"> Contact us </a> </li>
+					<li><a href="signin.php" class="current"> Sign In </a> </li>
 				</ul>
 			</div> <!--Menu -->
-			
+
 	</div> <!--header -->
 
-	
+
 	<div id="secondBanner">
 
 		<img src="images/house3.jpg" width="770" height="90" alt="welcome to Property Service"/>
@@ -59,8 +60,8 @@ $p_id = $_GET['ID'];
 
 	<div id="bigContent">
 			<div>
-			
-			   
+
+
 			<?php
 				// loops through each of the images found and displays them on the top
 					foreach ($recordimages as $image)
@@ -74,20 +75,20 @@ $p_id = $_GET['ID'];
 			</div>
 
 			<div id="secondContent">
-			
+
 			<?php
-		
+
 			if ($num_properties == 0)
 			{
 				echo "<h3>Property not found</h3>";
 			}
 			else
 			{
-			
+
 			// loops through all the property information and adds them to the page with their tags
 				foreach ($recordset as $record)
 				{
-					
+
 					echo "<h1>$",$record['rent_amt'], " Weekly</h1>";
 					echo "<h3>",$record['street_address'],", ",$record['suburb'],  "</h3>";
 					echo '<p><input class="submit_button" type="submit" value="Book Inspection"> <input class="submit_button" type="submit" value="Favourite this page"> </p>';
@@ -99,7 +100,7 @@ $p_id = $_GET['ID'];
 					echo "<p><b>Property Type: </b>",$record['property_type'],  "</p>";
 					echo "<p><b>Number of Rooms: </b>",$record['number_rooms'],  "</p>";
 					echo "<p><b>Number of bathrooms: </b>",$record['number_bathrooms'],  "</p>";
-					
+
 					//converts furnished to a YES/NO
 					if ($record['furnished'] == TRUE)
 					{
@@ -107,15 +108,15 @@ $p_id = $_GET['ID'];
 					}
 					else
 					{
-						$furnished = 'No';	
+						$furnished = 'No';
 					}
-					
+
 					echo "<hr> </hr>";
-					
+
 					echo "<b><Br>About</BR></b><p>", $record['description'], "</p>";
 				}
 			}
-			?>	
+			?>
 
 
 				<br>
@@ -124,12 +125,12 @@ $p_id = $_GET['ID'];
 				<br>
 
 
-			</div> 
+			</div>
 
 				<div id="news">
-					
 
-					
+
+
 					<p class="clear"></p>
 
 				</div><!--news-->
@@ -140,7 +141,7 @@ $p_id = $_GET['ID'];
 </div> <!--outside -->
 
 		<div id="footer">
-			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp; 
+			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp;
 				<a href="privacy.html"> Privacy Policy</a>
 				<a href="term.html"> Terms and Conditions</a>
 			</p>
@@ -148,4 +149,3 @@ $p_id = $_GET['ID'];
 
 </body>
 </html>
-

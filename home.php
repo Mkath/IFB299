@@ -16,16 +16,16 @@
 
 			<div id="Menu">
 				<ul>
-					<li><a href="home.html" class="current"> Home </a> </li>
+					<li><a href="home.php" class="current"> Home </a> </li>
 					<li><a href="properties_1.html" class="current"> Properties </a> </li>
 					<li><a href="contactus.html" class="current"> Contact us </a> </li>
 					<li><a href="signin.php" class="current"> Sign In </a> </li>
 				</ul>
 			</div> <!--Menu -->
-			
+
 	</div> <!--header -->
 
-	
+
 	<div id="secondBanner">
 
 		<img src="images/house3.jpg" width="770" height="90" alt="welcome to Property Service"/>
@@ -33,7 +33,7 @@
 
 
 	<div id="bigContent">
-			<div id="secondContent"> 
+			<div id="secondContent">
 				<div id="searchForm">
 
 	  				<form name="Search" onsubmit="return validate(Search)" method="GET" action="properties_1.php">
@@ -51,7 +51,7 @@
 	  				<br>
 					<br>
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="ANY" checked="checked">Any
-					<br>				
+					<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="1">One room
 	  				<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="roomnumber" value="2">Two rooms
@@ -62,7 +62,7 @@
 	  				<br>
 					<br>
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="ANY" checked="checked">Any
-					<br>				
+					<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="1">One bathroom
 	  				<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="2">Two bathrooms
@@ -70,7 +70,7 @@
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="3">Three bathrooms
 	  				<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="bathrooms" value="4">Four bathrooms and more
-	  				<br>	  				
+	  				<br>
 					<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="furnishedtype" value="ANY" checked="checked">Any
 	  				<br>
@@ -98,7 +98,7 @@
 					        <option value="400">$600</option>
 					        <option value="400">$700</option>
 					        <option value="400">$800</option>
-					        <option value="400">$900</option>					        
+					        <option value="400">$900</option>
 							<option value="1000">$1000</option>
 				        </select>
 			        </div> <!--searchForm -->
@@ -108,7 +108,7 @@
 				<br>
 				</form>
 
-				
+
 				<h1>About Us</h1>
 				<p>
 				At Rental Service Estate Agents, we aim to be the best. We strive to shine in every area of our business, continually reinventing ourselves as we find better ways to achieve our clients' goals. We are a learning organisation. We regularly review our structure, systems and processes, asking ourselves: How can we improve our service to our clients?
@@ -124,17 +124,17 @@
 				    <li>... and much more!</li>
 				</ul>
 				</p>
-	
-			</div> 
+
+			</div>
 
 				<div id="news">
 					<h3> News </h3>
-					
-					<img src="images/watch1.png" width="200" height="160" alt="watch1" /> 
+
+					<img src="images/watch1.png" width="200" height="160" alt="watch1" />
 					<h3> Organise your property search with new wearable app</h3>
 					<p>
-					Whether you’re looking to buy or rent property, 
-					our Android Wear app will help you land your 
+					Whether you’re looking to buy or rent property,
+					our Android Wear app will help you land your
 					dream home.
 					</p>
 					<p>
@@ -146,7 +146,7 @@
 					<p>
 					Discover a home for your lifestyle and budget, in suburbs you may not have previously considered
 					</p>
-		
+
 					<p class="clear"></p>
 
 				</div><!--news-->
@@ -157,7 +157,7 @@
 </div> <!--outside -->
 
 		<div id="footer">
-			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp; 
+			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp;
 				<a href="privacy.html"> Privacy Policy</a>
 				<a href="term.html"> Terms and Conditions</a>
 			</p>
@@ -165,4 +165,3 @@
 
 </body>
 </html>
-
