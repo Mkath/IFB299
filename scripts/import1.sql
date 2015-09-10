@@ -123,8 +123,9 @@ FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 CREATE TABLE `tenant_registration` (
 	`tenantid` int NOT NULL,	
 	`propertyid` int NOT NULL,
-	`inspection_time` varchar(50) NOT NULL,	
-  PRIMARY KEY (tenantid, propertyid, inspection_time),
+	`time` varchar(50) NOT NULL,
+	`review` varchar(100),
+	PRIMARY KEY (tenantid, propertyid, inspection_time),
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
 FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 );
