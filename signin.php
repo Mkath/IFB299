@@ -49,10 +49,10 @@
           </form><p>
           Don't Have an Account? <a href="tenant_registration.php">Sign Up</a>
           <?php
-		 
+
 
             //this function removes an unwanted characters from the suburb
-            if (isset($_GET['username']) && isset($_REQUEST['password'])){
+            if (isset($_GET['username']) AND isset($_REQUEST['password'])){
               function validate($field)
               {
               $field = trim($field);
@@ -70,9 +70,16 @@
 				$dbhost 	= "localhost";
 				$dbname		= "property_management";
 				$dbuser		= "root";
-				$dbpass		= "6Chain9123";			  
-			  
-			  
+				$dbpass		= "6Chain9123";
+
+        /*
+        $dbhost 	= "localhost";
+				$dbname		= "property_management";
+				$dbuser		= "root";
+				$dbpass		= "";
+        */
+
+
               //The following lines assign variables from the search form to local php variables
               $user_name = validate($_GET["username"]);
               $p_word = validate($_GET["password"]);
@@ -86,12 +93,14 @@
               $nCounter = 0;
               foreach($stmt as $row)
 						  {
-                if ($row['tenant_username'] == $user_name && $row['tenant_password'] == $p_word){
-                
+                if ($row['tenant_username'] == $user_name AND $row['tenant_password'] == $p_word){
+                  echo '<script type="text/javascript">
+                  alert("You have been successfully logged in");
+                  </script>';
 				session_start();
 				$_SESSION['t_id'] = $row['tenantid'];
 				$_SESSION['FirstName'] = $row['tenant_firstname'];
-				
+
 
 				if (isset($_GET['prev']))
 				{
@@ -101,7 +110,7 @@
 				{
 					$prev_page ="home.php";
 				}
-				
+
 				header("location:  http://{$_SERVER['HTTP_HOST']}/$prev_page");
                 //$nCounter = $nCounter+1;
 
