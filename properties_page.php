@@ -2,8 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 
-$p_id = $_GET['ID'];
+	if(!isset($_SESSION)){
+    session_start();
+	}
 
+	$p_id = $_GET['ID'];
+	
+	if (isset($_SESSION['t_id']))
+	{
+		$tenantid = $_SESSION['t_id'];
+	}
+	else
+	{
+		$tenantid = 0;
+	}
 /*
 	$dbhost 	= "localhost";
 	$dbname		= "1008545";
@@ -21,6 +33,10 @@ $p_id = $_GET['ID'];
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$recordset = $pdo->query("SELECT * FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
 					$recordimages = $pdo->query("SELECT * FROM property_images WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
+					$favs = $pdo->prepare("SELECT count(*) FROM tenant_favourites WHERE propertyid = '$p_id' AND tenantid = $tenantid");
+					$favs->execute();
+					$favourite_count = $favs->fetchColumn();
+					
 					$recCount = $pdo->prepare("SELECT count(*) FROM property_details WHERE propertyid = '$p_id'");
 					$recCount->execute();
 					$num_properties = $recCount->fetchColumn();
@@ -98,8 +114,29 @@ $p_id = $_GET['ID'];
 
 					echo "<h1>$",$record['rent_amt'], " Weekly</h1>";
 					echo "<h3>",$record['street_address'],", ",$record['suburb'],  "</h3>";
-					echo '<p><input class="submit_button" type="submit" value="Book Inspection"> <input class="submit_button" type="submit" value="Favourite this page"> </p>';
-					echo '<p><a href="',$record['gumtree_url'],'" target="_blank">View property on gumtree</a></p>';
+					
+					if ($tenantid == 0)
+					{
+						echo "<p>Must login to favourite page</p>";
+						echo '<p><a href="signin.php" target="_blank">Click here to sign in.</a></p>';
+					}
+					else if ($favourite_count > 0)
+					{
+						echo '<form name="registration" method="POST"  action="favourite_page.php?ID=',$p_id, '&method=remove"', 'onsubmit="">';
+						echo '<p><input class="favourite_page" type="submit" value="Unfavourite this page"> </p>';
+						echo '</form>';	
+					}
+					else
+					{
+						echo '<form name="registration" method="POST"  action="favourite_page.php?ID=',$p_id, '&method=add"', 'onsubmit="">';
+						echo '<p><input class="favourite_page" type="submit" value="Favourite this page"> </p>';
+						echo '</form>';
+					}
+	
+					if (isset($record['gumtree_url']))
+					{
+						echo '<p><a href="',$record['gumtree_url'],'" target="_blank">View property on gumtree</a></p>';
+					}
 					echo "<hr></hr>";
 					echo '<p><b>Inspection times:</b>', "</p>";
 					echo "<p>", $record['inspection_time1'], '</p>';
