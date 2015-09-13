@@ -1,4 +1,3 @@
-
 CREATE DATABASE  IF NOT EXISTS `Property_Management` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `Property_Management`;
 
@@ -37,64 +36,6 @@ FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 );
 
 
-
-
-/*		<table name="tenant_details" >
-			<column name="tenantid" type="int" jt="4" mandatory="y" />
-			<column name="propertyid" type="int" jt="4" />
-			<column name="tenant_firstname" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="tenant_dob" type="varchar" length="15" jt="12" />
-			<column name="tenant_phone" type="int" jt="4" />
-			<column name="tenant_email" type="varchar" length="200" jt="12" mandatory="y" />
-			<column name="tenant_postal" type="varchar" length="200" jt="12" />
-			<column name="tenant_lastname" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="tenant_username" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="tenant_password" type="varchar" length="100" jt="12" mandatory="y" />
-			<index name="pk_tenant_details" unique="PRIMARY_KEY" >
-				<column name="tenantid" />
-			</index>
-			<index name="idx_tenant_details" unique="UNIQUE" >
-				<column name="propertyid" />
-			</index>
-			<index name="idx_tenant_username" unique="UNIQUE" >
-				<column name="tenant_username" />
-			</index>
-			<fk name="fk_tenant_favourite" to_schema="ifb299" to_table="tenant_favourites" delete_action="cascade" >
-				<fk_column name="tenantid" pk="tenantid" />
-			</fk>
-			<fk name="fk_tenant_registration" to_schema="ifb299" to_table="tenant_registration" delete_action="cascade" >
-				<fk_column name="tenantid" pk="tenantid" />
-			</fk>
-*/
-
-/*
-<table name="tenant_favourites" >
-			<column name="tenantid" type="int" jt="4" mandatory="y" />
-			<column name="propertyid" type="int" jt="4" />
-			<index name="pk_tenant_favourites" unique="UNIQUE" >
-				<column name="tenantid" />
-			</index>
-			<index name="pk_tenant_favourites_0" unique="UNIQUE" >
-				<column name="propertyid" />
-			</index>
-			<storage><![CDATA[engine=InnoDB]]></storage>
-		</table>
-
-
-		<table name="tenant_registration" >
-			<column name="tenantid" type="int" jt="4" mandatory="y" />
-			<column name="propertyid" type="int" jt="4" mandatory="y" />
-			<index name="pk_tenant_registration" unique="UNIQUE" >
-				<column name="tenantid" />
-			</index>
-			<index name="pk_tenant_registration_0" unique="UNIQUE" >
-				<column name="propertyid" />
-			</index>
-			<storage><![CDATA[engine=InnoDB]]></storage>
-		</table>
-*/
-
-
 CREATE TABLE `tenant_details` (
 	`tenantid` int NOT NULL AUTO_INCREMENT,	
 	`propertyid` int,
@@ -125,10 +66,24 @@ CREATE TABLE `tenant_registration` (
 	`propertyid` int NOT NULL,
 	`time` varchar(50) NOT NULL,
 	`review` varchar(100),
-	PRIMARY KEY (tenantid, propertyid, inspection_time),
+	PRIMARY KEY (tenantid, propertyid, time),
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
 FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 );
+
+CREATE TABLE `contract_details` (
+	`contractid` int NOT NULL AUTO_INCREMENT, 
+	`propertyid` int NOT NULL,
+	`tenantid`  int,
+	`ownerid`  int,
+	`contract_length` varchar(50) NOT NULL,
+	`contract_conditions`  varchar (200),
+	`contract_expiry` date NOT NULL,
+PRIMARY KEY (contractid, propertyid), 
+FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
+FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
+);
+
 
 
 
@@ -169,6 +124,5 @@ insert into property_images (propertyid, image_decription, image_path) values ('
 
 insert into tenant_details (tenant_firstname, tenant_lastname, tenant_dob, tenant_phone, tenant_email, tenant_postal, tenant_username, tenant_password)  values ('Mike','Kath','1982-10-15','040499999','Chainber@hotmail.com','4068','mkath','pass123');
 
-
-
-
+insert into contract_details (propertyid, tenantid, contract_conditions, contract_length, contract_expiry) 
+values (1, 1, 'Testing contract conditions for property1 test1', '12 Months', '6/11/16');
