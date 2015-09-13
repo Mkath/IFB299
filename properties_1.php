@@ -146,7 +146,6 @@
 
 					  $SQL=$SQL . " ORDER BY suburb, rent_amt";
 					
-					echo $SQL;
 
 					  $stmt = $conn->prepare($SQL);
 
