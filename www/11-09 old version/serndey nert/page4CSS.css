@@ -1,0 +1,74 @@
+#wrapper{
+	width: 1000px;
+	margin-left: Auto;
+	margin-right: Auto;
+	text-align: center;
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid black;
+	background: url("images/tree.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	}
+
+#heading {
+	height: 100px;
+	width: 1000px;
+	text-align: center;
+	background-color: LightBlue;
+	color: Grey;
+	}
+
+#heading h1{
+	font-family: Gill Sans, sans-serif;
+	margin: 0px;
+	padding: 10px;
+	padding-bottom: 0px;
+	}
+
+#menu {
+	background-color: Black;
+	height: 35px;
+	padding-top: 10px;
+	}
+
+#menu a {
+	 padding-bottom: 5px;
+	 padding-left: 50px;
+	 padding-right: 50px;
+	 text-align: bottom;
+	 font-size:14pt;
+	 font: serif;
+	 font-style: oblique;
+	 background-color: grey;
+	 color: LightBlue;
+	 border-style: outset;
+	 border-width: 3px;
+	 text-decoration: none;
+	}
+#menu a:hover {
+	 background-color: black;
+	}
+
+#content {
+	height:800px;
+	color: #333333;
+	font-family: ‘Courier New’, Courier, monospace;
+	font-size: 14pt;
+	text-align: left;
+	margin-left: 200px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	}
+
+#footer {
+	height: 60px;
+	width: 1000px;
+	border-top: 1px solid black;
+	padding-top: 10px;
+	line-height: 25px;
+	background-color: darkgrey;
+	color: lightblue;
+	font-style: bold;
+	font-size: 14pt;
+	}

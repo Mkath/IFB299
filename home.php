@@ -23,17 +23,17 @@
 					<li><a href="home.php" class="current"> Home </a> </li>
 					<li><a href="properties_1.html" class="current"> Properties </a> </li>
 					<li><a href="contactus.html" class="current"> Contact us </a> </li>
-					<?php 
+					<?php
 					if (isset($_SESSION['FirstName']) && isset($_SESSION['t_id']))
 					{
 						echo  '<li><a href="tenant_profile.php" class="current"> Profile </a> </li>';
 						echo  '<li><a href="signout.php" class="current"> Sign Out </a> </li>';
-						
+
 					}
 					else
 					{
 						echo  '<li><a href="signin.php" class="current"> Sign In </a> </li>';
-						
+
 					}
 					?>
 				</ul>
@@ -64,7 +64,7 @@
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="type[]" value="Apartment">Apartment
 	  				<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="type[]" value="Unit">Unit
-	  				<br>					
+	  				<br>
 					<br>
 	  				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="checkbox" name="roomnumber[]" checked="checked" value="1">One room
 	  				<br>
@@ -142,7 +142,8 @@
 					<?php
 					if ( isset($_SESSION['FirstName']))
 					{
-						echo "<BR><p>Welcome, ", $_SESSION['FirstName'], "</p>";
+						echo "<br>Welcome, ", $_SESSION['FirstName'], "</br>";
+						echo '<a href="tenant_profile.php" class="current"> View Profile </a>';
 					}
 					?>
 					<h3> News </h3>

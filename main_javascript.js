@@ -81,3 +81,37 @@ function signinvalidate(form){
 function invisible(element){
 	document.getElementById(element).style.visibility = "hidden";
 }
+function validate_profilechanges(form){
+	var validation = true;
+	if (form.firstname.value == ""){
+		document.getElementById("firstnameMissing").style.visibility = "visible";
+		form.firstname.focus();
+		validation = false;
+	}
+	if (form.lastname.value == ""){
+		document.getElementById("lastnameMissing").style.visibility = "visible";
+		form.lastname.focus();
+		validation = false;
+	}
+  if (form.email.value == ""){
+		document.getElementById("emailMissing").style.visibility = "visible";
+		form.email.focus();
+		validation = false;
+	}
+	if ((form.dob.value == "")){
+		document.getElementById("dobError").style.visibility = "visible";
+		form.dob.focus();
+		validation = false;
+	}
+  if (form.phone.value == ""){
+		document.getElementById("phoneError").style.visibility = "visible";
+		form.phone.focus();
+		validation = false;
+	}
+	if (form.postcode.value == ""){
+		document.getElementById("postalError").style.visibility = "visible";
+		form.postcode.focus();
+		validation = false;
+	}
+	return validation;
+}
