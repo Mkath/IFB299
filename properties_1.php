@@ -1,4 +1,6 @@
-
+<?php
+include 'connection.php';
+?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -110,13 +112,13 @@
 					$dbname		= "1008545";
 					$dbuser		= "1008545";
 					$dbpass		= "IFB299GROUP93";
-					*/
+					
 
 					$dbhost 	= "localhost";
 					$dbname		= "property_management";
 					$dbuser		= "root";
 					$dbpass		= "6Chain9123";
-
+					*/
 					//this connects to the mysql database
 					$conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 
@@ -181,14 +183,6 @@
 							if ($nCounter == 0)
 							{
 								$image_path =  $result['image_path'];
-								/*echo '<a href="properties_page.php?ID=',$property_id, '">';
-								echo '<img width="400" height="160" src="/images/', $result['image_path'], '" /><p>';
-
-								echo "<p>",$row['street_address'],", ",$row['suburb'],  "</p>";
-								echo '</a>';
-								echo '<h3>Inspection Time</h3>';
-								echo '<p>', $row['inspection_time1'], '</p>';
-								echo '<p>', $row['inspection_time2'], '</p></p><br>'; */
 								$nCounter = $nCounter+1;
 							}
 						  }

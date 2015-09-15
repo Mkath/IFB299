@@ -1,4 +1,6 @@
 <?php
+include 'connection.php';
+
 //Creates a Regex pattern for each field.
   function validateForm(&$errors, $field_list){
     $patternName = '/([A-Za-z])\w+/';
@@ -39,10 +41,12 @@
         $field = htmlspecialchars($field);
         return $field;
         }
-        //The following lines assign variables from the search form to local php variables
+        
+	try {		
+		//The following lines assign variables from the search form to local php variables
         $username = validate($_POST["username"]);
 
-        $conn = new PDO("mysql:host=localhost;dbname=property_management", 'root', '');
+        $conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
         $stmt1 = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname');
         $stmt1->bindParam(':uname', $username, PDO::PARAM_STR);
         $stmt1->execute();
@@ -84,7 +88,12 @@
           window.location.href = "home.php";
           </script>';
         }
-
+	}
+	
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
 
   }
   else{

@@ -1,3 +1,6 @@
+<?php
+include 'connection.php';
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -60,25 +63,6 @@
               $field = htmlspecialchars($field);
               return $field;
               }
-			/*
-				$dbhost 	= "localhost";
-				$dbname		= "1008545";
-				$dbuser		= "1008545";
-				$dbpass		= "IFB299GROUP93";
-			*/
-
-				$dbhost 	= "localhost";
-				$dbname		= "property_management";
-				$dbuser		= "root";
-				$dbpass		= "6Chain9123";
-
-        /*
-        $dbhost 	= "localhost";
-				$dbname		= "property_management";
-				$dbuser		= "root";
-				$dbpass		= "";
-        */
-
 
               //The following lines assign variables from the search form to local php variables
               $user_name = validate($_GET["username"]);

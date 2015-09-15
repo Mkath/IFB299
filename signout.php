@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?php
+include 'connection.php';
 //signs the user out
 session_start();
 session_destroy(); 

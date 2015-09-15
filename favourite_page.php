@@ -1,4 +1,5 @@
 <?php
+include 'connection.php';
 	if(!isset($_SESSION)){
     session_start();
 	}
@@ -7,16 +8,12 @@
 	$tenantid = $_SESSION['t_id'];
 	$favourite = $_GET['method'];
 	
-	$dbhost 	= "localhost";
-	$dbname		= "property_management";
-	$dbuser		= "root";
-	$dbpass		= "6Chain9123";
-
 	
 	if (isset($p_id) AND isset($tenantid))
 	{
 
 		try {
+				//adds a favourite to the page
 				if ($favourite == "add")
 				{
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
@@ -25,6 +22,7 @@
 					
 					$recordset->execute();
 				}
+				//removes a favourite to the page
 				elseif ($favourite == "remove")
 				{
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
@@ -33,10 +31,10 @@
 					
 					$recordset->execute();					
 				}
+				//redirects back to the property.
 				header("location:  http://{$_SERVER['HTTP_HOST']}/properties_page.php?ID=$p_id");
 				
-				
-				//header("location:  http://{$_SERVER['HTTP_HOST']}/$prev_page");
+
 			}
 
 		catch(PDOException $e)
