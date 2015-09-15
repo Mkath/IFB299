@@ -1,24 +1,8 @@
 <?php
+include 'connection.php';
 	if(!isset($_SESSION)){
     session_start();
 	}
-  /*
-    $dbhost 	= "localhost";
-    $dbname		= "1008545";
-    $dbuser		= "1008545";
-    $dbpass		= "IFB299GROUP93";
-
-
-    $dbhost 	= "localhost";
-    $dbname		= "property_management";
-    $dbuser		= "root";
-    $dbpass		= "6Chain9123";
-    */
-
-    $dbhost 	= "localhost";
-    $dbname		= "property_management";
-    $dbuser		= "root";
-    $dbpass		= "";
 
   if(!isset($_SESSION['t_id'])) {
     echo '<script type="text/javascript">
@@ -62,6 +46,7 @@
         $field = htmlspecialchars($field);
         return $field;
         }
+		 //Assigns all variables passed in from previous page
           $tenantid = $_SESSION['t_id'];
           $first_name = validate($_POST["firstname"]);
           $last_name = validate($_POST["lastname"]);
@@ -69,7 +54,9 @@
           $dob = $_POST["dob"];
           $phone = $_POST["phone"];
           $postcode = $_POST["postcode"];
-
+		  $favourites = $_POST["favourite"];
+			
+		//builds are connection to the database and updates all the fields with the new information.
           $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
           $stmt = $conn->prepare("UPDATE `tenant_details` SET `tenant_firstname` = :firstname, `tenant_phone` = :phone, `tenant_postal` = :postal, `tenant_dob` = :dob, `tenant_lastname` = :lastname, `tenant_email` = :email WHERE `tenantid` = :tid");
           $stmt->bindParam(':firstname', $first_name, PDO::PARAM_STR);
@@ -80,6 +67,17 @@
           $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
           $stmt->bindParam(':postal', $postcode, PDO::PARAM_STR);
           $stmt->execute();
+		  
+		 
+		  //Loops through all the selected favourites and removes them from their favourites list.
+		  foreach ($favourites as $p_id)
+		  {
+			$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
+			$recordset = $pdo->prepare("DELETE FROM tenant_favourites WHERE tenantid = '$tenantid' AND propertyid = '$p_id'");		
+			$recordset->execute();
+		  }
+		
+		  //sends a message to the user if successful and redirects them back to the page.
           echo '<script type="text/javascript">
           alert("Your changes have been saved");
           window.location.href = "tenant_profile.php";

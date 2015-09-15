@@ -1,5 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
+include 'connection.php';
+
 	if(!isset($_SESSION)){
     session_start();
 	}
@@ -48,40 +50,58 @@
 		<img src="images/house3.jpg" width="770" height="90" alt="welcome to Property Service"/>
 	</div> <!---secondBanner -->
   <?php
-  /*
-    $dbhost 	= "localhost";
-    $dbname		= "1008545";
-    $dbuser		= "1008545";
-    $dbpass		= "IFB299GROUP93";
 
+	try {
+		//gets all their profile information from database
+		$tenantid = $_SESSION['t_id'];
+		$conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenantid` = :tid');
+		$stmt->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$stmt->execute();
+		
+		//assigns the information to local variables.
+		foreach($stmt as $row)
+		{
 
-    $dbhost 	= "localhost";
-    $dbname		= "property_management";
-    $dbuser		= "root";
-    $dbpass		= "6Chain9123";
-    */
-
-    $dbhost 	= "localhost";
-    $dbname		= "property_management";
-    $dbuser		= "root";
-    $dbpass		= "";
-
-
-    $tenantid = $_SESSION['t_id'];
-    $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-    $stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenantid` = :tid');
-    $stmt->bindParam(':tid', $tenantid, PDO::PARAM_STR);
-    $stmt->execute();
-    foreach($stmt as $row)
-    {
-
-      $_SESSION['FirstName'] = $row['tenant_firstname'];
-      $_SESSION['LastName'] = $row['tenant_lastname'];
-      $_SESSION['Email'] = $row['tenant_email'];
-      $_SESSION['Dob'] = $row['tenant_dob'];
-      $_SESSION['PCode'] = $row['tenant_postal'];
-      $_SESSION['Phone'] = $row['tenant_phone'];
-    }
+		  $_SESSION['FirstName'] = $row['tenant_firstname'];
+		  $_SESSION['LastName'] = $row['tenant_lastname'];
+		  $_SESSION['Email'] = $row['tenant_email'];
+		  $_SESSION['Dob'] = $row['tenant_dob'];
+		  $_SESSION['PCode'] = $row['tenant_postal'];
+		  $_SESSION['Phone'] = $row['tenant_phone'];
+		}
+	}
+	//errors if it cannot make a connection to the database
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
+	$conn = null;
+	
+	try {
+		//gets all the information about their chosen favourites
+		$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$favourites = $pdo->prepare('SELECT * FROM `tenant_favourites` WHERE `tenantid` = :tid');
+		$favourites->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$favourites->execute();
+		
+		//counts how many favourites found (if any)
+		$pdo1 = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		$pdo1->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$recCount = $pdo1->prepare('SELECT count(*) FROM `tenant_favourites` WHERE `tenantid` = :tid');
+		$recCount->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$recCount->execute();
+		$num_favs = $recCount->fetchColumn();
+				
+	}
+	//errors if it cannot make a connection to the database
+	catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+		$pdo = null;	
 
   ?>
 
@@ -131,6 +151,55 @@
           <span id="postalError" style="color:red; visibility:hidden">*Post Code is a required field</span>
           <?php if (isset($errors['postcode'])) echo $errors['postcode'] ?>
           </br>
+		  <?php
+		  
+		   //only create table if any favourites exist for that tenant
+			if ($num_favs > 0)
+			{
+				//create header of the table
+				echo '<HR></HR>';
+				echo '<H3>Your favourite pages</H3>';
+				echo '<Br>';
+				echo '<table style="width:100%">';
+				echo '<tr><td>Property Address</td>';
+				//echo '<td>Inspection Times</td>';
+				echo '<td style="text-align: center; vertical-align: middle">Remove</td></tr>';
+				
+				//loop through all the favourites found.
+				foreach($favourites  as $favourite)
+				{
+					$p_id = $favourite['propertyid'];
+					//echo $p_id;
+					try
+					{
+						$pdo2 = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
+						$pdo2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						$properties = $pdo2->query("SELECT * FROM property_details WHERE propertyid = '$p_id' ORDER BY SUBURB")->fetchAll(PDO::FETCH_ASSOC);
+						
+						//get the property information based on the favourite.
+						foreach ($properties as $property)
+						{
+							echo '<td><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></td>';
+							//echo '<td>', $property['inspection_time1'], ' & ',  $property['inspection_time2'] ,'</td>';
+							echo  '<td style="text-align: center; vertical-align: middle">';
+							echo '<input type="checkbox" name="favourite[]" value="', $property['propertyid'], '"></td>';
+						
+						}
+						
+					}
+					catch(PDOException $e)
+					{
+						echo $e->getMessage();
+					}
+					//end tags and close off pdo
+					echo '</tr>';
+					$pdo2 = null;					
+				}	
+				echo '</table>';
+			}
+		  ?>
+		  
+		  </br>
           <input type="submit" value="Save Changes" style="width: 500px">
         </form>
 
