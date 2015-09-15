@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Welcome to Rent property </title>
-    <link href="main_9.css" rel="stylesheet" type="text/css"/>
+    <link href="main_11.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="main_javascript.js"></script>
 </head>
 
@@ -15,12 +15,7 @@
 		<h1>Rental Service Company</h1>
 
 			<div id="Menu">
-				<ul>
-					<li><a href="home.php" class="current"> Home </a> </li>
-					<li><a href="properties.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>
-          <li><a href="signin.php" class="current"> Sign In </a> </li>
-				</ul>
+			<?php include 'menu.php'; ?>
 			</div> <!--Menu -->
 
 	</div> <!--header -->

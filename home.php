@@ -7,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title> Welcome to Rent property </title>
-    <link href="main_9.css" rel="stylesheet" type="text/css"/>
+    <link href="main_11.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="main_javascript.js"></script>
 </head>
 
@@ -19,24 +19,7 @@
 		<h1>Rental Service Company</h1>
 
 			<div id="Menu">
-				<ul>
-					<li><a href="home.php" class="current"> Home </a> </li>
-					<li><a href="properties_1.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>
-					<?php
-					if (isset($_SESSION['FirstName']) && isset($_SESSION['t_id']))
-					{
-						echo  '<li><a href="tenant_profile.php" class="current"> Profile </a> </li>';
-						echo  '<li><a href="signout.php" class="current"> Sign Out </a> </li>';
-
-					}
-					else
-					{
-						echo  '<li><a href="signin.php" class="current"> Sign In </a> </li>';
-
-					}
-					?>
-				</ul>
+			<?php include 'menu.php'; ?>
 			</div> <!--Menu -->
 
 	</div> <!--header -->
