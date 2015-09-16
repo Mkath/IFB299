@@ -5,14 +5,21 @@
 			<column name="contractid" type="int" jt="4" mandatory="y" />
 			<column name="contract_length" type="varchar" length="20" jt="12" />
 			<column name="contact_expiry" type="date" jt="91" />
-			<column name="contract_price" type="float" jt="7" />
 			<column name="contract_terms" type="varchar" length="200" jt="12" />
 			<column name="propertyid" type="int" jt="4" mandatory="y" />
+			<column name="tenantid" type="int" jt="4" />
+			<column name="ownerid" type="int" jt="4" mandatory="y" />
 			<index name="pk_contract_details" unique="PRIMARY_KEY" >
 				<column name="contractid" />
 			</index>
 			<index name="pk_contract_details_0" unique="UNIQUE" >
 				<column name="propertyid" />
+			</index>
+			<index name="pk_contract_details_1" unique="UNIQUE" >
+				<column name="tenantid" />
+			</index>
+			<index name="pk_contract_details_2" unique="UNIQUE" >
+				<column name="ownerid" />
 			</index>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
@@ -29,7 +36,7 @@
 			<column name="employee_username" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="employee_password" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="inspection_time2" type="varchar" length="100" jt="12" />
-			<column name="inpection_time1" type="varchar" length="100" jt="12" />
+			<column name="inpection_time1" type="varchar" length="100" jt="12" mandatory="y" />
 			<index name="pk_owner_details_0" unique="PRIMARY_KEY" >
 				<column name="employeeid" />
 			</index>
@@ -65,6 +72,9 @@
 			<fk name="fk_owner_properties" to_schema="ifb299" to_table="owner_properties" delete_action="cascade" >
 				<fk_column name="ownerid" pk="ownerid" />
 			</fk>
+			<fk name="fk_owner_details" to_schema="ifb299" to_table="contract_details" >
+				<fk_column name="ownerid" pk="ownerid" />
+			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
 		<table name="owner_properties" >
@@ -89,11 +99,11 @@
 			<column name="suburb" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="number_rooms" type="int" jt="4" mandatory="y" />
 			<column name="property_type" type="varchar" length="50" jt="12" mandatory="y" />
-			<column name="furnished" type="varchar" length="25" jt="12" mandatory="y" >
+			<column name="furnished" type="bool" length="25" jt="-7" mandatory="y" >
 				<comment><![CDATA[must be furnished or unfurnished]]></comment>
 			</column>
 			<column name="number_bathrooms" type="int" jt="4" mandatory="y" />
-			<column name="description" type="text" jt="-1" />
+			<column name="description" type="varchar" length="300" jt="12" />
 			<column name="rent_amt" type="int" jt="4" mandatory="y" />
 			<column name="gumtree" type="varchar" length="300" jt="12" />
 			<column name="inpection_time1" type="varchar" length="100" jt="12" >
@@ -102,7 +112,7 @@
 			<column name="inspection_time2" type="varchar" length="100" jt="12" >
 				<comment><![CDATA[Validation on website that this field is only available if posted is set to yes]]></comment>
 			</column>
-			<column name="posted" type="varchar" length="1" jt="12" mandatory="y" >
+			<column name="posted" type="bool" length="1" jt="-7" mandatory="y" >
 				<comment><![CDATA[Must be Y/N
 Indicates if house is posted online
 If Y then one innspection time is mandatory, and gumtree advertisement field is available.
@@ -152,8 +162,8 @@ If N inspenction times, and gumtree advertisement are unfocusable fields.]]></co
 		<table name="property_images" >
 			<column name="propertyid" type="int" jt="4" mandatory="y" />
 			<column name="imageid" type="int" jt="4" mandatory="y" />
-			<column name="image_description" type="int" jt="4" mandatory="y" />
-			<column name="image_path" type="int" jt="4" mandatory="y" />
+			<column name="image_description" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="image_path" type="varchar" length="50" jt="12" />
 			<index name="pk_property_images" unique="PRIMARY_KEY" >
 				<column name="imageid" />
 			</index>
@@ -188,6 +198,9 @@ If N inspenction times, and gumtree advertisement are unfocusable fields.]]></co
 			<fk name="fk_tenant_registration" to_schema="ifb299" to_table="tenant_registration" delete_action="cascade" >
 				<fk_column name="tenantid" pk="tenantid" />
 			</fk>
+			<fk name="fk_tenant_details" to_schema="ifb299" to_table="contract_details" >
+				<fk_column name="tenantid" pk="tenantid" />
+			</fk>
 			<storage><![CDATA[engine=InnoDB]]></storage>
 		</table>
 		<table name="tenant_favourites" >
@@ -214,14 +227,14 @@ If N inspenction times, and gumtree advertisement are unfocusable fields.]]></co
 		</table>
 	</schema>
 	<layout id="Layout_3685ffb" name="IFB299" show_relation_columns="y" >
-		<entity schema="ifb299" name="property_images" color="b7c8e3" x="45" y="405" />
-		<entity schema="ifb299" name="employee_details" color="b7c8e3" x="270" y="450" />
-		<entity schema="ifb299" name="owner_details" color="b7c8e3" x="495" y="330" />
-		<entity schema="ifb299" name="tenant_favourites" color="b7c8e3" x="330" y="195" />
 		<entity schema="ifb299" name="owner_properties" color="b7c8e3" x="315" y="330" />
-		<entity schema="ifb299" name="tenant_details" color="b7c8e3" x="510" y="45" />
-		<entity schema="ifb299" name="property_details" color="b7c8e3" x="75" y="90" />
 		<entity schema="ifb299" name="tenant_registration" color="b7c8e3" x="300" y="90" />
+		<entity schema="ifb299" name="tenant_favourites" color="b7c8e3" x="330" y="195" />
+		<entity schema="ifb299" name="property_details" color="b7c8e3" x="75" y="90" />
+		<entity schema="ifb299" name="property_images" color="b7c8e3" x="45" y="405" />
 		<entity schema="ifb299" name="contract_details" color="b7c8e3" x="120" y="600" />
+		<entity schema="ifb299" name="employee_details" color="b7c8e3" x="285" y="450" />
+		<entity schema="ifb299" name="owner_details" color="b7c8e3" x="495" y="330" />
+		<entity schema="ifb299" name="tenant_details" color="b7c8e3" x="510" y="45" />
 	</layout>
 </project>

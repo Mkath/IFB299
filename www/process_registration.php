@@ -79,6 +79,20 @@
           $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
           $stmt->bindParam(':postal', $postcode, PDO::PARAM_STR);
           $stmt->execute();
+
+          $stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = :pword');
+          $stmt->bindParam(':uname', $username, PDO::PARAM_STR);
+          $stmt->bindParam(':pword', $password, PDO::PARAM_STR);
+          $stmt->execute();
+
+          foreach($stmt as $row)
+          {
+            if (isset($row['tenantid'])){
+              session_start();
+              $_SESSION['t_id'] = $row['tenantid'];
+              $_SESSION['FirstName'] = $row['tenant_firstname'];
+            }
+          }
           echo '<script type="text/javascript">
           alert("Congratulations! Account successfully created.");
           window.location.href = "home.php";
