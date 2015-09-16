@@ -70,14 +70,11 @@ include 'connection.php';
 <div id="outside">
 	<div id="header">
 		<br>
-		<h1>Rental Service Company</h1>
+		
 
 			<div id="Menu">
 				<ul>
-					<li><a href="home.php" class="current"> Home </a> </li>
-					<li><a href="properties.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>
-					<li><a href="signin.php" class="current"> Sign In </a> </li>
+					<?php include 'menu.php'; ?>
 				</ul>
 			</div> <!--Menu -->
 
@@ -91,48 +88,10 @@ include 'connection.php';
 
 			<div id="bigContent">
 				<div id="secondContent">
-					
-			
-			<?php
-			/*$recordset= $pdo->query("SELECT tenant_details.tenantid, tenant_details.tenant_firstname,tenant_details.tenant_lastname
-			FROM tenant_details, contract_details
-			WHERE tenant_details.tenantid = contract_details.tenantid;") 
-
-			//$result = mysql_query($query) or die(mysql_error());
-
-
-			while($row1 = mysql_fetch_array($result)){
-  
-			}
-			$recordset = $pdo->query("SELECT property_details.propertyid, property_details.street_address, property_details.suburb, property_details.rent_amt
-            FROM property_details, contract_details
-            WHERE property_details.propertyid = contract_details.propertyid")
-
-			$result = mysql_query($query) or die(mysql_error());
-
-
-			while($row2 = mysql_fetch_array($result)){
-  
-			}*/
-			
-			?>
-			
-
-			
-			
+							
 
 			<?php
-			
-	/*
-			$sql = "SELECT * FROM contract_details WHERE contractid = '$c_id'";
-			$sql = "SELECT tenant_details.tenantid, tenant_details.tenant_firstname,tenant_details.tenant_lastname
-			FROM tenant_details, contract_details
-			WHERE tenant_details.tenantid = contract_details.tenantid;";
-			$sql .= "SELECT property_details.propertyid, property_details.street_address, property_details.suburb, property_details.rent_amt
-            FROM property_details, contract_details
-            WHERE property_details.propertyid = contract_details.propertyid";
-*/		
-			
+				
 			
 			if ($num_contracts == 0)
 			{

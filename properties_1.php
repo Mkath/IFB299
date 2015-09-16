@@ -15,7 +15,7 @@ include 'connection.php';
 <div id="outside">
 	<div id="header">
 		<br>
-		<h1>Rental Service Company</h1>
+		
 
 			<div id="Menu">
 				<ul>
