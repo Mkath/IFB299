@@ -17,7 +17,6 @@ $p_id = $_GET['ID'];
 	$dbhost 	= "localhost";
 	$dbname		= "property_management";
 	$dbuser		= "root";
-	//$dbpass		= "root";
 	$dbpass		= "root";
 			try {
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
@@ -31,8 +30,8 @@ $p_id = $_GET['ID'];
 					$recCount->execute();
 					$num_contracts = $recCount->fetchColumn();
 					
-					//Gets the property details for that property
-					$property = $pdo->query("SELECT * FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
+					//Gets the relevant info from property details for that property
+					$property = $pdo->query("SELECT property_details.propertyid, property_details.street_address, property_details.suburb, property_details.rent_amt FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
 					
 					$counter = 1;
 					$t_id = "";
@@ -50,8 +49,8 @@ $p_id = $_GET['ID'];
 					// a Tenant exists for this property
 					if ($counter > 1)
 					{
-
-						$tenant = $pdo->query("SELECT * FROM tenant_details WHERE tenantid = '$t_id'")->fetchAll(PDO::FETCH_ASSOC);
+					//Gets relevant tenant details
+						$tenant = $pdo->query("SELECT tenant_details.tenantid, tenant_details.tenant_firstname,tenant_details.tenant_lastname FROM tenant_details WHERE tenantid = '$t_id'")->fetchAll(PDO::FETCH_ASSOC);
 						
 					}
 					
@@ -99,47 +98,10 @@ $p_id = $_GET['ID'];
 
 			<div id="bigContent">
 				<div id="secondContent">
+		
+
+			<?php
 					
-			
-			<?php
-			/*$recordset= $pdo->query("SELECT tenant_details.tenantid, tenant_details.tenant_firstname,tenant_details.tenant_lastname
-			FROM tenant_details, contract_details
-			WHERE tenant_details.tenantid = contract_details.tenantid;") 
-
-			//$result = mysql_query($query) or die(mysql_error());
-
-
-			while($row1 = mysql_fetch_array($result)){
-  
-			}
-			$recordset = $pdo->query("SELECT property_details.propertyid, property_details.street_address, property_details.suburb, property_details.rent_amt
-            FROM property_details, contract_details
-            WHERE property_details.propertyid = contract_details.propertyid")
-
-			$result = mysql_query($query) or die(mysql_error());
-
-
-			while($row2 = mysql_fetch_array($result)){
-  
-			}*/
-			
-			?>
-			
-
-			
-			
-
-			<?php
-			
-	/*
-			$sql = "SELECT * FROM contract_details WHERE contractid = '$c_id'";
-			$sql = "SELECT tenant_details.tenantid, tenant_details.tenant_firstname,tenant_details.tenant_lastname
-			FROM tenant_details, contract_details
-			WHERE tenant_details.tenantid = contract_details.tenantid;";
-			$sql .= "SELECT property_details.propertyid, property_details.street_address, property_details.suburb, property_details.rent_amt
-            FROM property_details, contract_details
-            WHERE property_details.propertyid = contract_details.propertyid";
-*/		
 			
 			
 			if ($num_contracts == 0)
