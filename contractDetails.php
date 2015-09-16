@@ -1,13 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 include 'connection.php';
-
 	//renew the session.
  	if(!isset($_SESSION)){
 		session_start();
 	}
 	
-
 		$p_id = $_GET['ID'];
 		$tenantid = $_SESSION['t_id'];	
 	
@@ -15,16 +13,16 @@ include 'connection.php';
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					
-					//Gets a list of all the contracts ordering it the latest contract
+					//Retrieves a list of all the contracts ordering it the latest contract
 					$contracts = $pdo->query("SELECT * FROM contract_details WHERE propertyid = '$p_id' ORDER BY contractid DESC")->fetchAll(PDO::FETCH_ASSOC);
 					
-					//Gets the count of how many contracts were found.
+					//Retrieves the count of how many contracts were found.
 					$recCount = $pdo->prepare("SELECT count(*) FROM contract_details WHERE propertyid = '$p_id'");
 					$recCount->execute();
 					$num_contracts = $recCount->fetchColumn();
 					
-					//Gets the property details for that property
-					$property = $pdo->query("SELECT * FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
+					//Retrieves relevant property details for that property
+					$property = $pdo->query("SELECT property_details.propertyid, property_details.street_address, property_details.suburb, property_details.rent_amt FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
 					
 					$counter = 1;
 					$t_id = "";
@@ -42,8 +40,8 @@ include 'connection.php';
 					// a Tenant exists for this property
 					if ($counter > 1)
 					{
-
-						$tenant = $pdo->query("SELECT * FROM tenant_details WHERE tenantid = '$t_id'")->fetchAll(PDO::FETCH_ASSOC);
+						//Retrieves relevant tenant details
+						$tenant = $pdo->query("SELECT tenant_details.tenantid, tenant_details.tenant_firstname,tenant_details.tenant_lastname = '$t_id'")->fetchAll(PDO::FETCH_ASSOC);
 						
 					}
 					
