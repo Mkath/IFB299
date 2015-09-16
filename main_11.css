@@ -51,6 +51,7 @@ div#bigContent {
 	position: absolute;
 	left: 380px;
 	bottom: 0;
+	
 
 }
 
@@ -70,7 +71,7 @@ div#bigContent {
 
 	font-family: "Century Gothic";
 	display:block;
-	color:  2c2d29; /*deep green*/
+	color:  #DFEA07;
 	font-weight: bold;
 	text-decoration: none;/*underline*/
 	padding: 0 15px 0 10px;
