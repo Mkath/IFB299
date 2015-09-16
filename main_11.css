@@ -51,7 +51,7 @@ div#bigContent {
 	position: absolute;
 	left: 380px;
 	bottom: 0;
-	
+
 }
 
 #Menu ul {
@@ -67,13 +67,13 @@ div#bigContent {
 }
 
 #Menu li a:link, #Menu li a:visited {
-	
+
 	font-family: "Century Gothic";
 	display:block;
 	color:  2c2d29; /*deep green*/
 	font-weight: bold;
 	text-decoration: none;/*underline*/
-	padding: 0 15px 0 30px;
+	padding: 0 15px 0 10px;
 	margin-right: 10px;
 	line-height: 25px;
 	border: none;
@@ -174,14 +174,3 @@ div#footer{
 
 /* miscellaneous styles*/
 .clear { clear: both}
-
-
-
-
-
-
-
-
-
-
-
