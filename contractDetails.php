@@ -1,24 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
-//$c_id = 1
+include 'connection.php';
 
-//$p_id = 1;
+	//renew the session.
+ 	if(!isset($_SESSION)){
+		session_start();
+	}
+	
 
-//Gets the property id from the URL contractDetails?ID=1
-$p_id = $_GET['ID'];
-
-/*
-	$dbhost 	= "localhost";
-	$dbname		= "1008545";
-	$dbuser		= "1008545";
-	$dbpass		= "IFB299GROUP93";
-*/
-
-	$dbhost 	= "localhost";
-	$dbname		= "property_management";
-	$dbuser		= "root";
-	//$dbpass		= "root";
-	$dbpass		= "root";
+		$p_id = $_GET['ID'];
+		$tenantid = $_SESSION['t_id'];	
+	
 			try {
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

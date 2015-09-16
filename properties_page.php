@@ -41,6 +41,13 @@ include 'connection.php';
 					$inspectionCount = $pdo->prepare("SELECT count(*) FROM tenant_registration WHERE propertyid = '$p_id' AND tenantid = '$tenantid'");
 					$inspectionCount->execute();
 					$num_inspections = $inspectionCount->fetchColumn();
+
+					//Gets the count of all the contract_details for that property
+					$Contracts = $pdo->query("SELECT Count(*) FROM contract_details WHERE propertyid = '$p_id' AND tenantid = '$tenantid' ");			
+					$Contracts->execute();
+					$num_Contracts = $Contracts->fetchColumn();
+					
+				
 				}
 
 			catch(PDOException $e)
@@ -196,6 +203,13 @@ include 'connection.php';
 					echo "<hr> </hr>";
 
 					echo "<b><Br>About</BR></b><p>", $record['description'], "</p>";
+					echo "<hr></hr>";
+					if ($num_Contracts > 0)
+					{
+						echo '<P>Contract Details</p>';
+						echo '<p><a href="contractDetails.php?ID=',$p_id, '" >Click here to view your contract details</a></p>';
+						
+					}
 				}
 			}
 			?>
