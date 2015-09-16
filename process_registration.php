@@ -84,7 +84,7 @@ include 'connection.php';
           $stmt->bindParam(':postal', $postcode, PDO::PARAM_STR);
           $stmt->execute();
           echo '<script type="text/javascript">
-          alert("Congradulations! Account successfully created.");
+          alert("Congratulations! Account successfully created.");
           window.location.href = "home.php";
           </script>';
         }
