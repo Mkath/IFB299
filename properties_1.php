@@ -56,7 +56,9 @@ include 'connection.php';
 							{
 								if (strstr($record, '|More'))
 								{
-									$SQL=$SQL . " AND ( UCASE(" . $dbfield . ") >= '" . strtoupper(strstr($record, '|More', true)) .  "'";
+									$amount = strtoupper(strstr($record, '|More', true));
+									$amount_num = (int)$amount;
+									$SQL=$SQL . " AND ( UCASE(" . $dbfield . ") >= '" . $amount_num;
 								}
 								else
 								{
@@ -69,7 +71,9 @@ include 'connection.php';
 								
 								if (strstr($record, '|More'))
 								{
-									$SQL=$SQL . " OR UCASE(" . $dbfield . ") >= '" . strtoupper(strstr($record, '|More', true)) .  "'";
+									$amount = strtoupper(strstr($record, '|More', true));
+									$amount_num = (int)$amount;									
+									$SQL=$SQL . " OR UCASE(" . $dbfield . ") >= " . $amount_num;
 								}
 								else
 								{									
@@ -103,18 +107,8 @@ include 'connection.php';
 					$max_rent = $_GET["max"];
 					$furnished = $_GET["furnishedtype"];
 					$bathrooms = $_GET["bathrooms"];
-
-					/*$dbhost 	= "localhost";
-					$dbname		= "1008545";
-					$dbuser		= "1008545";
-					$dbpass		= "IFB299GROUP93";
 					
 
-					$dbhost 	= "localhost";
-					$dbname		= "property_management";
-					$dbuser		= "root";
-					$dbpass		= "6Chain9123";
-					*/
 					//this connects to the mysql database
 					$conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 
@@ -143,6 +137,7 @@ include 'connection.php';
 
 
 					  $SQL=$SQL . " ORDER BY suburb, rent_amt";
+					
 					
 
 					  $stmt = $conn->prepare($SQL);

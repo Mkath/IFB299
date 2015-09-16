@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `Property_Management` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `Property_Management`;
 USE `Property_Management`;
 
 
