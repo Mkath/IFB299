@@ -29,17 +29,28 @@
 	$dbpass		= "6Chain9123";
 
 			try {
+					//connection to the database
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					
+					//get all the property details, images and favourites that relate to that property
 					$recordset = $pdo->query("SELECT * FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
 					$recordimages = $pdo->query("SELECT * FROM property_images WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
+					
+					//Get the count of the favourites for validation
 					$favs = $pdo->prepare("SELECT count(*) FROM tenant_favourites WHERE propertyid = '$p_id' AND tenantid = $tenantid");
 					$favs->execute();
 					$favourite_count = $favs->fetchColumn();
 					
+					//Get the count of all the property details for validation
 					$recCount = $pdo->prepare("SELECT count(*) FROM property_details WHERE propertyid = '$p_id'");
 					$recCount->execute();
 					$num_properties = $recCount->fetchColumn();
+					
+					//Get the count of all the inspections for that customer for validation
+					$inspectionCount = $pdo->prepare("SELECT count(*) FROM tenant_registration WHERE propertyid = '$p_id' AND tenantid = '$tenantid'");
+					$inspectionCount->execute();
+					$num_inspections = $inspectionCount->fetchColumn();
 				}
 
 			catch(PDOException $e)
@@ -115,11 +126,13 @@
 					echo "<h1>$",$record['rent_amt'], " Weekly</h1>";
 					echo "<h3>",$record['street_address'],", ",$record['suburb'],  "</h3>";
 					
+					// Check to see if the user has logged in first
 					if ($tenantid == 0)
 					{
-						echo "<p>Must login to favourite page</p>";
+						echo "<p>Must login to favourite page or book inspection times</p>";
 						echo '<p><a href="signin.php" target="_blank">Click here to sign in.</a></p>';
 					}
+					// if so and they have already favourited this page. Make the button say "unfavourite"
 					else if ($favourite_count > 0)
 					{
 						echo '<form name="registration" method="POST"  action="favourite_page.php?ID=',$p_id, '&method=remove"', 'onsubmit="">';
@@ -128,19 +141,59 @@
 					}
 					else
 					{
+						// else they have logged in and add the favourite button
 						echo '<form name="registration" method="POST"  action="favourite_page.php?ID=',$p_id, '&method=add"', 'onsubmit="">';
 						echo '<p><input class="favourite_page" type="submit" value="Favourite this page"> </p>';
 						echo '</form>';
 					}
+					
+
 	
 					if (isset($record['gumtree_url']))
 					{
 						echo '<p><a href="',$record['gumtree_url'],'" target="_blank">View property on gumtree</a></p>';
 					}
+					
+					
 					echo "<hr></hr>";
-					echo '<p><b>Inspection times:</b>', "</p>";
-					echo "<p>", $record['inspection_time1'], '</p>';
-					echo "<p>", $record['inspection_time2'], "</p>";
+					
+					
+					echo '<p><b>Available inspection times:</b>', "</p>";
+					// just display inspection times if the user isnt logged in
+					if ($tenantid == 0)
+					{
+						echo "<p>", $record['inspection_time1'], '</p>';
+						echo "<p>", $record['inspection_time2'], "</p>";
+					
+					}
+					
+					else
+					{
+						//otherwise build a select box
+						echo '<form method="POST" action="process_inspection.php?ID=', $p_id, '">';
+						foreach ($recordset as $inspection)
+						{
+							echo '<p>';
+							echo '<select name="timeOption">';
+							echo '<option value="', $inspection['inspection_time1'], '">', $inspection['inspection_time1'], '</option>';
+							echo '<option value="', $inspection['inspection_time2'], '">', $inspection['inspection_time2'], '</option>';
+							echo '</select>';
+							
+							//only display the book inspections button if the user has not already chosen an inspection
+							if ($num_inspections == 0)
+							{
+								echo '<input type="submit" value="Book Inspection">';
+							}
+							else
+							{
+								echo '<p> You have already booked an inspection</p>';
+							}
+							echo '</p>';
+						}
+						echo '</form>';
+					}
+					echo "<HR></HR>";					
+					
 					echo "<p><b>Property Type: </b>",$record['property_type'],  "</p>";
 					echo "<p><b>Number of Rooms: </b>",$record['number_rooms'],  "</p>";
 					echo "<p><b>Number of bathrooms: </b>",$record['number_bathrooms'],  "</p>";
