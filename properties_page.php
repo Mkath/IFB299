@@ -1,6 +1,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
+include 'connection.php';
 
 	if(!isset($_SESSION)){
     session_start();
@@ -16,17 +17,6 @@
 	{
 		$tenantid = 0;
 	}
-/*
-	$dbhost 	= "localhost";
-	$dbname		= "1008545";
-	$dbuser		= "1008545";
-	$dbpass		= "IFB299GROUP93";
-*/
-
-	$dbhost 	= "localhost";
-	$dbname		= "property_management";
-	$dbuser		= "root";
-	$dbpass		= "6Chain9123";
 
 			try {
 					//connection to the database
@@ -75,12 +65,7 @@
 		<h1>Rental Service Company</h1>
 
 			<div id="Menu">
-				<ul>
-					<li><a href="home.php" class="current"> Home </a> </li>
-					<li><a href="properties.html" class="current"> Properties </a> </li>
-					<li><a href="contactus.html" class="current"> Contact us </a> </li>
-					<li><a href="signin.php" class="current"> Sign In </a> </li>
-				</ul>
+				<?php include 'menu.php'; ?>
 			</div> <!--Menu -->
 
 	</div> <!--header -->
