@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en" class="ie10">
+
+<head>
+<meta charset="UTF-8">
+<meta name ="apple-mobile-webapp-title" content="BCC Tennis Courts">
+<meta name = "apple-mobile-web-app-capable" content ="yes">
+<meta name = "mobile-web-app-capable" content ="yes">
+<meta name = "apple-mobile-web-app-status-bar-style" content = "black-translucent">
+<meta name = "viewport" content = "width = device-width, initial-scale = 1">
+<link rel ="apple-touch-icon-precomposed" href="apple-touch-icon-iphone.jpg">
+<link rel ="apple-touch-startup-image" href= "BCC.jpg">
+<link href= "Main.css" rel= "stylesheet" type ="text/css">
+<script type="text/javascript">
+		var image1=new Image()
+		image1.src="house1.jpg"
+		var image2=new Image()
+		image2.src="house2.jpg"
+</script>
+
+<title>Home Page</title>
+</head>
+
+<body>
+
+<div class = "container">
+	<div class = "header"> 
+		<div class = "logo"><h1><a href ="#">Property For Rent</a></h1></div>
+		<div class = "navigation">
+		<ul>
+			<li><a href = "Main.html">Home</a></li>
+		<!--	<li><a href = "searchcriteria.html">Search</a></li> -->
+		<!--	<li><a href = "#"></a></li> -->
+			<li><a href = "#">Register</a></li>
+			<li><a href = "#">Login</a> </li>
+		</ul>
+		</div>
+	</div>
+
+		
+
+		<div id = "content">
+			
+	</div>
+ 		<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>				
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Search Properties:<br>
+				<br>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="text" name="venuename" notrequired placeholder="Enter sate or postcode" size = "100" maxlength = "100">
+				<br>
+				<br>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="house" value="house" checked>House
+				<br>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="radio" name="unit" value="unit">Apartment & Unit
+				<br>
+				<br>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" value="Submit" onclick="return val();"/>
+				&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="reset" value="Reset"/>
+				<br>
+				<br>
+			</form>	
+
+    
+    
+
+	<img src="boxingring.png" name="slide" width="500" height="250">
+	<script type="text/javascript">
+	var step =1
+	function slideit(){
+	document.images.slide.src=eval("image"+step+".src")
+	if(step<2)
+		step++
+	else
+		step=1
+	setTimeout("slideit()",1500)
+	}
+	slideit()
+	</script>
+		<h3>News</h3>
+		<p>Rent Property, a Fairfax Media business, is one of Australia’s leading multi-platform property industry destinations.
+
+		We provide residential, commercial and rural property marketing solutions and search tools, plus information for buyers, investors, sellers, renters and agents Australia wide.</p>
+
+		<h3 p.italic>News</h3>
+
+		<p>We also deliver CRM technology to real estate agencies, plus property data and research services to property seekers and sellers, real estate agencies, developers, government organisations and financial markets.
+
+		Our media solutions are engineered for advertisers looking to promote their products and services to our qualified audiences.
+
+		No matter what you’re after, Rent Property has your property needs covered.</p>
+	
+		
+	</div>
+   
+	<div id = "content">
+			
+		<img src="house1.jpg" alt="Lettuce" class="right" width=200 height= 100 />
+
+		<p>Rent Property, a Fairfax Media business, is one of Australia’s leading multi-platform property industry destinations.
+
+		We provide residential, commercial and rural property marketing solutions and search tools, plus information for buyers, investors, sellers, renters and agents Australia wide. We also deliver CRM technology to real estate agencies, plus property data and research services to property seekers and sellers, real estate agencies, developers, government organisations and financial markets.
+
+		Our media solutions are engineered for advertisers looking to promote their products and services to our qualified audiences.
+
+		No matter what you’re after, Rent Property has your property needs covered.</p>
+		
+	
+		<div id ="footer" >  
+		<img src="facebook.png" alt="Playing" class="socialmedia" height = "40" width ="155"/> <br>
+		<p class ="footer">Copyright &#169; Group 93 IFB299 </p>
+		
+		</div>
+	
+	</div>
+
+</div>
+
+
+</body>
+
+</html>
