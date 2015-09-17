@@ -1,1 +1,0 @@
-SELECT * FROM property_management.tenant_registration;
