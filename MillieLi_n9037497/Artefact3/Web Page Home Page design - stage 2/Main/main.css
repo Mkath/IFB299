@@ -1,0 +1,90 @@
+
+
+body {
+	font-family: Georgia, serif;
+	background: #bbb;
+	margin: 0;
+	padding: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6, li{
+	margin: 1ex 1em;
+}
+
+div#outerDiv {
+	width: 770px;
+	margin: 0 auto;
+	background: #fff url(bannerimage.jpg);no-repeat;
+	height:100px;
+
+}
+/****** header *******/
+div#header {
+	height: 100px;
+	position: relative;
+}
+
+/*  Contact link */
+#outerDiv div#contactButton {
+	position: absolute;
+	left: 650px;
+	top: 0;
+}
+/*create a icon for contactus*/
+#contactButton a:link, #contactBUtton a:visited {
+	height: 29px;
+	width: 86px;
+	display: block;
+	text-indent: -1000em;
+	border: none; 
+	background: url(images/contact_icon_dual.gif) no-repeat left top;}
+/*when mouse move to icon*/
+#contactButton a:hover, #contactBUtton a:active {
+	background-position: left bottom;
+}
+/*main menu*/
+#header #mainMenu {
+	position: absolute;
+	right: 320px;
+	bottom: 0;
+	
+}
+
+#mainMenu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#mainMenu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#mainMenu li a:link, #mainMenu li a:visited {
+	font-family: "Trebuchet MS", san-serif;
+	display:block;
+	color:  #fff;
+	text-decoration: none;
+	padding: 0 15px 0 30px;
+	margin-right: 10px;
+	line-height: 25px;
+	background: url(images/nav_rollover_1.jpg) no-repeat left bottom;
+	border: none;
+}
+
+#mainMenu li a:hover, #mainMenu li a:active {
+	color: #f8b449;
+	background-position: left top;
+}
+/*change different image and text color*/
+
+
+
+
+
+
+
+
+
