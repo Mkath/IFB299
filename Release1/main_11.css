@@ -1,0 +1,177 @@
+
+
+body {
+	/*font-family: Georgia, serif;*/
+	font-family: "Century Gothic";
+	/*background: #bbbbbb;*/
+	background: #9cb466;
+	margin: 0;
+	padding: 0;
+}
+
+p, h1, h2, h3, h4, li{
+	margin: 1ex 1em;
+}
+
+div#outside {
+	width: 770px;
+	margin: 0 auto;
+	/*background: #ffffff url(images/sky2.png);no-repeat;*/
+	background: #ffffff url(images/sky3.jpg);no-repeat;
+	height:100px;
+
+}
+/****** header *******/
+div#header {
+	height: 100px;
+	position: relative;
+}
+
+#hearder h1{
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #1b9d95;
+	margin: 0 0 .4ex 0;
+}
+
+div#secondBanner{
+	height: 90px;
+}
+
+
+div#bigContent {
+	background-color: #ffffff;
+	padding:5px;
+}
+
+
+
+/*menu*/
+#header #Menu {
+	position: absolute;
+	left: 380px;
+	bottom: 0;
+	
+
+}
+
+#Menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#Menu li {
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+
+#Menu li a:link, #Menu li a:visited {
+
+	font-family: "Century Gothic";
+	display:block;
+	color:  #DFEA07;
+	font-weight: bold;
+	text-decoration: none;/*underline*/
+	padding: 0 15px 0 10px;
+	margin-right: 10px;
+	line-height: 25px;
+	border: none;
+}
+
+#Menu li a:hover, #Menu li a:active {
+	/*color: #93a537;/*green*/
+	color: #b94300;/*green*/
+	background-position: left top;
+}
+/*main content */
+#bigContent div#secondContent {
+	float: left;
+	width: 430px;
+	margin: 0;
+	padding: 0 15px;
+}
+
+#secondContent p{
+	font-family: "Century Gothic";
+	font-size: .9em;
+	line-height: 1.4em;
+	color: #000;
+	margin: 1ex 0;
+}
+
+#secondContent h1, #secondContent h2, #secondContent h3, #secondContent h4 {
+	font-family: "Century Gothic";
+}
+
+#secondContent h1{
+	font-size: 1.6em;
+	font-weight: bold;
+	color:  2c2d29;
+	margin: 0 0 .4ex 0;
+}
+
+#secondContent h2{
+	font-size: 1.3em;
+	color: #3c3809;
+	margin:.4ex 0;
+}
+
+#secondContent h3{
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #666;
+	margin: 1ex 0 -.2ex 0;
+}
+
+
+/*news content*/
+#contentOne div#news {
+	float: right;
+	width: 265px;
+	padding: 0 10px;
+	margin: 0;
+	border-left: solid #aaa 1px;
+}
+
+#news p {
+	font-family: "Century Gothic";
+	font-size: .8.1em;
+	line-height: 1.2em;
+	color: #666;
+	margin: 0 0 3ex 0;
+}
+
+#news h3 {
+	font-family: "Century Gothic";
+	font-size:  1.1em;
+	color: red;
+	margin: 1.1ex 0 .5ex 0;
+
+}
+/* footer*/
+
+div#footer{
+	clear: both;
+	background: #9cb466; /*light green*/
+	margin: 0 auto;
+	padding: 5px;
+}
+
+#footer p {
+	font-family: "Century Gothic";
+	font-size: .70em;
+	color:  2c2d29;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#footer a {
+	color:  ffffff;
+	text-decoration: none;
+}
+
+/* miscellaneous styles*/
+.clear { clear: both}
