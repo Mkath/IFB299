@@ -38,8 +38,6 @@ try {
 				$propertyTenant = explode("|", $employee_values);
 				$employeeid = $propertyTenant[1];				
 				
-				
-				
 				//builds are connection to the database and updates all the fields with the new information.
 				$conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 
@@ -64,9 +62,7 @@ try {
 				$stmt->bindParam(':o_id', $ownerid, PDO::PARAM_STR);
 				$stmt->bindParam(':property', $propertyid, PDO::PARAM_STR);
 				$stmt->execute();	
-
 				
-						
 				//removes the property from the tenants table
 				$stmt = $conn->prepare("UPDATE `tenant_details` SET `propertyid` = NULL WHERE `propertyid` = :property");
 				$stmt->bindParam(':property', $propertyid, PDO::PARAM_STR);
@@ -94,7 +90,6 @@ try {
 
 					$stmt = $conn->prepare("UPDATE `property_details` SET `tenant` = NULL WHERE `tenantid` = :tid");
 					$stmt->bindParam(':tid', $tenantid, PDO::PARAM_STR);
-					//$stmt->bindParam(':property', $propertyid, PDO::PARAM_STR);
 					$stmt->execute();
 				
 				//displays success message
