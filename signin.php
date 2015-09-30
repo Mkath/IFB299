@@ -114,8 +114,11 @@ include 'connection.php';
 					$_SESSION['FirstName'] = $row['employee_firstname'];
 					if ($row['employee_admin'] == TRUE)
 					{
-						
 						$_SESSION['UserType'] = "Admin";
+					}
+					else
+					{
+						$_SESSION['UserType'] = "Employee";
 					}
 					
 				}
