@@ -8,9 +8,20 @@
 		echo '<li><a href="contactus.html" class="current"> Contact us </a> </li>';
 		
 		
-		if (isset($_SESSION['FirstName']) && isset($_SESSION['t_id']))
+		if (isset($_SESSION['FirstName']))
 		{
-			echo  '<li><a href="tenant_profile.php" class="current"> Profile </a> </li>';
+			if (isset($_SESSION['t_id']))
+			{
+				echo  '<li><a href="tenant_profile.php" class="current"> Profile </a> </li>';
+			}
+			elseif (isset($_SESSION['o_id']))
+			{
+				echo  '<li><a href="utils_page.php" class="current">Utils</a> </li>';
+			}
+			elseif (isset($_SESSION['e_id']))
+			{
+				echo  '<li><a href="utils_page.php" class="current">Utils</a> </li>';
+			}
 			echo  '<li><a href="signout.php" class="current"> Sign Out </a> </li>';
 
 		}

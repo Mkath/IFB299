@@ -40,7 +40,13 @@ include 'connection.php';
             <p>
             <input type="password"  name="password" onkeypress="invisible('passwordMissing')" placeholder="Enter Password">
             <br><span id="passwordMissing" style="color:red; visibility:hidden">*'Password' is a required field</span>
-            <p>
+			</p>
+			<select name="Login_type">
+			<option value="User">User</option>
+			<option value="Staff">Employee</option>
+			<option value="Owner">Owner</option>
+			</select>		
+			<p>
             <input type="submit" value="Sign In"/>
             &nbsp; &nbsp;
             <input type="reset" value="Clear"/>
@@ -62,24 +68,65 @@ include 'connection.php';
               //The following lines assign variables from the search form to local php variables
               $user_name = validate($_GET["username"]);
               $p_word = validate($_GET["password"]);
+			  $login = $_GET["Login_type"];
+			 
 
               $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-              $stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = :pword');
+			  if ($login == "Staff")
+			  {
+				$stmt = $conn->prepare('SELECT * FROM `employee_details` WHERE `employee_username` = :uname AND `employee_password` = :pword');
+				
+			  }
+			  elseif ($login == "Owner")
+			  {
+				$stmt = $conn->prepare('SELECT * FROM `propertyowner_details` WHERE `propertyowner_username` = :uname AND `propertyowner_password` = :pword');
+			  }
+			  else
+			  {
+				$stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = :pword');  
 
+			  }
+			  
               $stmt->bindParam(':uname', $user_name, PDO::PARAM_STR);
-						  $stmt->bindParam(':pword', $p_word, PDO::PARAM_STR);
+			  $stmt->bindParam(':pword', $p_word, PDO::PARAM_STR);
+			 
               $stmt->execute();
               $nCounter = 0;
+			
+			  
+			  
               foreach($stmt as $row)
-						  {
-                if ($row['tenant_username'] == $user_name AND $row['tenant_password'] == $p_word){
+				{
                   echo '<script type="text/javascript">
                   alert("You have been successfully logged in");
                   </script>';
 				session_start();
-				$_SESSION['t_id'] = $row['tenantid'];
-				$_SESSION['FirstName'] = $row['tenant_firstname'];
-
+				
+				if ($login == "Owner")
+				{
+					$_SESSION['o_id'] = $row['propertyownerid'];
+					$_SESSION['FirstName'] = $row['propertyowner_firstname'];
+					$_SESSION['UserType'] = "Owner";
+				}
+				elseif ($login == "Staff")
+				{
+					$_SESSION['e_id'] = $row['employeeid'];
+					$_SESSION['FirstName'] = $row['employee_firstname'];
+					if ($row['employee_admin'] == TRUE)
+					{
+						
+						$_SESSION['UserType'] = "Admin";
+					}
+					
+				}
+				else
+				{
+					$_SESSION['t_id'] = $row['tenantid'];
+					$_SESSION['FirstName'] = $row['tenant_firstname'];
+					$_SESSION['UserType'] = "User";
+					
+				}
+				
 
 				if (isset($_GET['prev']))
 				{
@@ -91,18 +138,19 @@ include 'connection.php';
 				}
 
 				header("location:  http://{$_SERVER['HTTP_HOST']}/$prev_page");
-                //$nCounter = $nCounter+1;
-
-                }
+              
 
               }
+
+              
               if ($nCounter == 0) {
+				
                 echo '<script type="text/javascript">';
                 echo 'alert("Username or Password is incorrect!");';
                 echo 'window.location.href = "signin.php";';
                 echo '</script>';
                 return false;
-
+				
              }
             }
           ?>
