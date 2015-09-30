@@ -4,9 +4,7 @@ USE `Property_Management`;
 
 CREATE TABLE `property_details` (
 	`propertyid` int NOT NULL AUTO_INCREMENT,
-	`employeeid` int,
 	`tenantid`  int,
-	`ownerid`  int,
 	`street_address` VARCHAR(50) NOT NULL,
 	`suburb` VARCHAR(50) NOT NULL,
 	`number_rooms` int NOT NULL,
@@ -17,8 +15,7 @@ CREATE TABLE `property_details` (
 	`rent_amt` int NOT NULL,
 	`gumtree_url` varchar(150),
 	`inspection_time1` varchar(50) NOT NULL,	
-	`inspection_time2` varchar(50) NOT NULL,
-	
+	`inspection_time2` varchar(50) NOT NULL,	
 	`posted` boolean NOT NULL,	
   PRIMARY KEY (`propertyid`)
 ) charset utf8;
@@ -47,7 +44,7 @@ CREATE TABLE `tenant_details` (
 	`tenant_postal` Int NOT NULL,
 	`tenant_username` varchar(50) NOT NULL,
 	`tenant_password` varchar(50) NOT NULL,	
-  PRIMARY KEY (`tenantid`),
+  PRIMARY KEY (`tenantid`)
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 );
 
@@ -85,6 +82,50 @@ FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 );
 
 
+CREATE TABLE `employee_details` (
+	`employeeid` int NOT NULL AUTO_INCREMENT,	
+	`employee_firstname` varchar(50) NOT NULL,
+	`employee_lastname` varchar(50) NOT NULL,	
+	`employee_dob` date NOT NULL,
+	`employee_phone` varchar(50) NOT NULL,
+	`employee_email` varchar(50) NOT NULL,
+	`employee_postal` Int NOT NULL,
+	`employee_username` varchar(50) NOT NULL,
+	`employee_password` varchar(50) NOT NULL,
+	`employee_admin` BOOLEAN NOT NULL Default 0,	
+  PRIMARY KEY (`employeeid`)
+);
+
+CREATE TABLE `employee_property` (
+	`employeeid` int NOT NULL,	
+	`propertyid` int NOT NULL,
+	PRIMARY KEY (employeeid, propertyid),
+FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
+FOREIGN KEY (employeeid) REFERENCES employee_details(employeeid)
+);
+
+
+CREATE TABLE `propertyowner_details` (
+	`propertyownerid` int NOT NULL AUTO_INCREMENT,	
+	`propertyowner_firstname` varchar(50) NOT NULL,
+	`propertyowner_lastname` varchar(50) NOT NULL,	
+	`propertyowner_dob` date NOT NULL,
+	`propertyowner_phone` varchar(50) NOT NULL,
+	`propertyowner_email` varchar(50) NOT NULL,
+	`propertyowner_postal` Int NOT NULL,
+	`propertyowner_username` varchar(50) NOT NULL,
+	`propertyowner_password` varchar(50) NOT NULL,	
+  PRIMARY KEY (`propertyownerid`)
+);
+
+
+CREATE TABLE `propertyowner_property` (
+	`propertyownerid` int NOT NULL,	
+	`propertyid` int NOT NULL,
+  PRIMARY KEY (propertyownerid, propertyid),
+FOREIGN KEY (propertyid) REFERENCES property_details(propertyid),
+FOREIGN KEY (propertyownerid) REFERENCES propertyowner_details(propertyownerid)
+);
 
 
 insert into property_details (street_address,suburb,number_rooms,property_type,furnished,number_bathrooms,description,rent_amt,gumtree_url,inspection_time1,inspection_time2,posted)  values('123 Smith Street','Taringa',3,'unit',FALSE,1,'This house is a test, It features a number of different features.',320,'http://www.gumtree.com.au/s-ad/beaumaris/flatshare-houseshare/large-beach-side-house-king-bed-ensuite-pool-view-transport-/1085277833','15 September 2015 12:00 - 12:15','16 September 2015 12:15 - 12:30',FALSE);
@@ -126,3 +167,9 @@ insert into tenant_details (tenant_firstname, tenant_lastname, tenant_dob, tenan
 
 insert into contract_details (propertyid, tenantid, contract_conditions, contract_length, contract_expiry) 
 values (1, 1, 'Testing contract conditions for property1 test1', '12 Months', '6/11/16');
+
+insert into employee_details (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password)  values ('Sam','Gamgee','1970-02-15','040526608','gamgee@hotmail.com','4122','sgamgee','testing1');
+
+insert into propertyowner_details (propertyowner_firstname, propertyowner_lastname, propertyowner_dob, propertyowner_phone, propertyowner_email, propertyowner_postal, propertyowner_username, propertyowner_password)  values ('Frodo','Baggins','1980-01-01','0423612786','baggins@hotmail.com','4122','fbaggins','testing1');
+
+insert into employee_details (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password, employee_admin)  values ('Admin','Gamgee','1970-02-15','040526608','gamgee@hotmail.com','4122','admin','testing1', TRUE);
