@@ -61,6 +61,12 @@ include 'connection.php';
 						$stmt1->bindParam(':oid', $ownerid, PDO::PARAM_STR);
 						$stmt1->execute();
 					}
+					elseif ($_SESSION['UserType'] == "Admin")
+					{
+						$stmt1 = $conn->prepare('SELECT * FROM `property_details`');
+						$stmt1->execute();
+						
+					}
 					elseif (isset($_SESSION['e_id']))
 					{
 						$eid = $_SESSION['e_id'];
@@ -80,8 +86,8 @@ include 'connection.php';
 					echo '<a href="employee_profile.php?ID=',$_SESSION['e_id'],'">View profile</a><p>';
 					echo '<hr></hr>';
 					echo '<h3>Property Functions</h3><p>';
-					echo '<a href="main_11.css">Create new property</a><p>';
-					echo '<a href="main_11.css">Edit existing property</a><p>';
+					echo '<a href="Create_property.php">Create new property</a><p>';
+					//echo '<a href="main_11.css">Edit existing property</a><p>';
 					echo '<a href="assign_property.php">Assign tenant/employee/owner to a property</a><p>';
 					
 					echo '<HR></HR>';
@@ -110,22 +116,34 @@ include 'connection.php';
 					echo '<a href="owner_profile.php?ID=',$_SESSION['o_id'],'">View profile</a><p>';
 					echo '<hr></hr>';
 					echo '<h3>Property Functions</h3><p>';
-					echo '<a href="main_11.css">Create new property</a><p>';
-					echo '<a href="main_11.css">Edit existing property</a><p>';
+					echo '<a href="Create_property.php">Create new property</a><p>';
+					//echo '<a href="main_11.css">Edit existing property</a><p>';
 					echo '<hr></hr>';					
 					echo "<h3>Current properties that I own</h3>";
 				}
+				echo '<table style="width:100%">';
 				foreach ($stmt1 as $assigned)
 				{
 					$propertyid = $assigned['propertyid'];
-
-					$properties = $conn->query("SELECT * FROM property_details WHERE propertyid = $propertyid")->fetchAll(PDO::FETCH_ASSOC);
+					
+					if ($_SESSION['UserType'] == "Admin")
+					{
+						$properties = $conn->query("SELECT * FROM property_details WHERE propertyid = $propertyid")->fetchAll(PDO::FETCH_ASSOC);
+					}
+					else
+					{
+						$properties = $conn->query("SELECT * FROM property_details WHERE propertyid = $propertyid")->fetchAll(PDO::FETCH_ASSOC);
+					}
+					echo '<tr>';
+					
 					foreach ($properties as $property)
 					{
-						echo '<p><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></p>';
-					}		
+						echo '<td><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></td>';
+						echo '<td><a href="edit_property?ID=', $property['propertyid'],'">Edit</a></td>';
+					}
+					echo '</tr>';
 				}
-				
+				echo '</table>'
 				?>
 
 
