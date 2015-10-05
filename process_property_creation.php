@@ -97,12 +97,10 @@
   foreach ($stmt2 as $row)
   {
     $pid = $row['propertyid'];
-    echo $pid;
 
     $file_name = $now.'-'.$_FILES[$fieldname]['name'];
     $description = $_POST["image_description"];
 
-    echo $file_name, $description;
 
     $conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
     $stmt = $conn->prepare("INSERT INTO `property_images` (image_description, image_path, propertyid)
@@ -111,6 +109,11 @@
     $stmt->bindParam(':description', $description, PDO::PARAM_STR);
     $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
     $stmt->execute();
+
+    echo '<script type="text/javascript">
+    alert("Your Property has Successfully been Created");
+    window.location.href = "home.php";
+    </script>';
   }
 
   //

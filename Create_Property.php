@@ -20,6 +20,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title> Welcome to Rent property </title>
         <link href="main_11.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="main_javascript.js"></script>
     </head>
 
     <body>
@@ -44,22 +45,25 @@
 
       	<div id="bigContent">
       			<div id="secondContent">
-              <form id="Upload" action="<?php echo $uploadHandler ?>" enctype="multipart/form-data" method="post">
+              <form id="Upload" name="Upload" action="<?php echo $uploadHandler ?>" onsubmit="return validate_createproperty(Upload)" enctype="multipart/form-data" method="post">
 
                   <h1>
                       Your Property Information
                   </h1>
                   <p>
                     Street Address<br>
-                    <input type="text" name="address" placeholder = "123 example street" style="width: 500px">
+                    <input type="text" name="address" placeholder = "123 example street" style="width: 500px" onkeypress="invisible('addressERROR')"><br>
+                    <span id="addressERROR" style="color:red; visibility:hidden">*Address is a Required Field</span>
                   </p>
                   <p>
                     Suburb<br>
-                    <input type="text" name="suburb" placeholder = "Suburb" style="width: 300px">
+                    <input type="text" name="suburb" placeholder = "Suburb" style="width: 300px" onkeypress="invisible('suburbERROR')"><br>
+                    <span id="suburbERROR" style="color:red; visibility:hidden">*Suburb is a Required Field</span>
                   </p>
                   <p>
                     Number of Bedrooms<br>
-                    <input type="number" name="roomnumber" min="1" max="10" placeholder = "No." style="width: 50px">
+                    <input type="number" name="roomnumber" min="1" max="10" placeholder = "No." style="width: 50px" onclick="invisible('roomnumberERROR')">
+                    <span id="roomnumberERROR" style="color:red; visibility:hidden">*Number of Bedrooms is a Required Field</span>
                   </p>
                   <p>
                     Propert Type<br>
@@ -71,16 +75,18 @@
                   </p>
                   <p>
                     Furnished?<br>
-                    <input type="radio" name="furnished" value="1">Yes
+                    <input type="radio" name="furnished" value="1" checked="true">Yes
                     <input type="radio" name="furnished" value="0">No
                   </p>
                   <p>
                     Number of Bathrooms<br>
-                    <input type="number" name="bathroom_number" min="1" max="10" placeholder = "No." style="width: 50px">
+                    <input type="number" name="bathroom_number" min="1" max="10" placeholder = "No." style="width: 50px" onclick="invisible('bathroom_numberERROR')">
+                    <span id="bathroom_numberERROR" style="color:red; visibility:hidden">*Number of Bathrooms is a Required Field</span>
                   </p>
                   <p>
                     Rent Amount<br>
-                    $<input type="text" name="rent_amt" placeholder="200" style="width:30px"> p/week
+                    $<input type="text" name="rent_amt" placeholder="200" style="width:30px" onkeypress="invisible('rent_amountERROR')"> p/week<br>
+                    <span id="rent_amountERROR" style="color:red; visibility:hidden">*Rent Amount is a Required Field</span>
                   </p>
                   <p>
                     Link to Gumtree Advertisment (optional)<br>
@@ -88,15 +94,18 @@
                   </p>
                   <p>
                     Description of Property<br>
-                    <input type="text" name="description" style="width: 500px; height: 100px">
+                    <input type="text" name="description" style="width: 500px; height: 100px" onkeypress="invisible('descriptionERROR')"><br>
+                    <span id="descriptionERROR" style="color:red; visibility:hidden">*Description of Property is a Required Field</span>
                   </p>
                   <p>
                     1st Inspection Time<br>
-                    <input type="text" name="inspection_time1" placeholder = "15 September 2015 12:00 - 12:15" style="width: 300px">
+                    <input type="text" name="inspection_time1" placeholder = "15 September 2015 12:00 - 12:15" style="width: 300px" onkeypress="invisible('inspection_time1ERROR')"><br>
+                    <span id="inspection_time1ERROR" style="color:red; visibility:hidden">*1st Inspection Time is a Required Field</span>
                   </p>
                   <p>
                     2nd Inspection Time<br>
-                    <input type="text" name="inspection_time2" placeholder = "16 September 2015 12:15 - 12:30" style="width: 300px">
+                    <input type="text" name="inspection_time2" placeholder = "16 September 2015 12:15 - 12:30" style="width: 300px" onkeypress="invisible('inspection_time2ERROR')"><br>
+                    <span id="inspection_time2ERROR" style="color:red; visibility:hidden">*2nd Inspection Time is a Required Field</span>
                   </p>
                   <p>
                       <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>">
@@ -104,11 +113,13 @@
                   <br>
                   <p>
                       <label for="file">Image to upload:</label>
-                      <input id="file" type="file" name="file">
+                      <input id="file" type="file" name="file" onclick="invisible('fileERROR')"><br>
+                      <span id="fileERROR" style="color:red; visibility:hidden">*An image of your property is required</span>
                   </p>
                   <p>
                     Image Description:
-                    <input type="text" name="image_description" placeholder = "Description" style="width: 150px">
+                    <input type="text" name="image_description" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_descriptionERROR')"><br>
+                    <span id="image_descriptionERROR" style="color:red; visibility:hidden">*An description of your property is required</span>
                   </p>
                   <br>
                   <p>

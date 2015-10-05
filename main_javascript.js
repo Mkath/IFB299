@@ -81,6 +81,7 @@ function signinvalidate(form){
 function invisible(element){
 	document.getElementById(element).style.visibility = "hidden";
 }
+
 function validate_profilechanges(form){
 	var validation = true;
 	if (form.firstname.value == ""){
@@ -113,5 +114,61 @@ function validate_profilechanges(form){
 		form.postcode.focus();
 		validation = false;
 	}
+	return validation;
+}
+//this function is for the validation of propery creation
+function validate_createproperty(form){
+	var validation = true;
+	if (form.address.value == ""){
+		document.getElementById("addressERROR").style.visibility = "visible";
+		form.address.focus();
+		validation = false;
+	}
+	if (form.suburb.value == ""){
+		document.getElementById("suburbERROR").style.visibility = "visible";
+		form.suburb.focus();
+		validation = false;
+	}
+	if (form.roomnumber.value == ""){
+		document.getElementById("roomnumberERROR").style.visibility = "visible";
+		form.roomnumber.focus();
+		validation = false;
+	}
+	if (form.bathroom_number.value == ""){
+		document.getElementById("bathroom_numberERROR").style.visibility = "visible";
+		form.bathroom_number.focus();
+		validation = false;
+	}
+	if (form.rent_amt.value == ""){
+		document.getElementById("rent_amountERROR").style.visibility = "visible";
+		form.rent_amt.focus();
+		validation = false;
+	}
+	if (form.description.value == ""){
+		document.getElementById("descriptionERROR").style.visibility = "visible";
+		form.description.focus();
+		validation = false;
+	}
+	if (form.inspection_time1.value == ""){
+		document.getElementById("inspection_time1ERROR").style.visibility = "visible";
+		form.inspection_time1.focus();
+		validation = false;
+	}
+	if (form.inspection_time2.value == ""){
+		document.getElementById("inspection_time2ERROR").style.visibility = "visible";
+		form.inspection_time2.focus();
+		validation = false;
+	}
+	if (form.file.value == ""){
+		document.getElementById("fileERROR").style.visibility = "visible";
+		validation = false;
+	}
+	if (form.image_description.value == ""){
+		document.getElementById("image_descriptionERROR").style.visibility = "visible";
+		form.image_description.focus();
+		validation = false;
+	}
+
+
 	return validation;
 }
