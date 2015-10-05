@@ -91,6 +91,51 @@ include 'connection.php';
 		}
 		$pdo = null;	
 
+	try {
+		//gets all the information about amin assign to employee  
+		$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$houses = $pdo->prepare('SELECT * FROM `property_details` WHERE `tenantid` = :tid');
+		$houses->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$houses->execute();
+		
+		
+		//counts how many tasks found (if any)
+		$recCount = $pdo->prepare('SELECT count(*) FROM `property_details` WHERE `tenantid` = :tid');		
+		$recCount->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$recCount->execute();
+		$count_houses = $recCount->fetchColumn();
+		
+				
+	}
+	//errors if it cannot make a connection to the database
+	catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+		
+	try {
+		//gets all the information about amin assign to employee  
+		$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$inspection_regs = $pdo->prepare('SELECT * FROM `tenant_registration` WHERE `tenantid` = :tid');
+		$inspection_regs->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$inspection_regs->execute();
+		
+		
+		//counts how many tasks found (if any)
+		$recCount = $pdo->prepare('SELECT count(*) FROM `tenant_registration` WHERE `tenantid` = :tid');		
+		$recCount->bindParam(':tid', $tenantid, PDO::PARAM_STR);
+		$recCount->execute();
+		$count_register = $recCount->fetchColumn();
+		
+				
+	}
+	//errors if it cannot make a connection to the database
+	catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}			
   ?>
 
 	<div id="bigContent">
@@ -168,7 +213,7 @@ include 'connection.php';
 						foreach ($properties as $property)
 						{
 							echo '<td><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></td>';
-							//echo '<td>', $property['inspection_time1'], ' & ',  $property['inspection_time2'] ,'</td>';
+		
 							echo  '<td style="text-align: center; vertical-align: middle">';
 							echo '<input type="checkbox" name="favourite[]" value="', $property['propertyid'], '"></td>';
 						
@@ -185,6 +230,72 @@ include 'connection.php';
 				}	
 				echo '</table>';
 			}
+			
+		   //only display all the upcoming inspections for a tenants property
+			if ($count_houses > 0)
+			{
+				//create header of the table
+				echo '<HR></HR>';
+				echo '<H3>Upcoming inspections for the property you live</H3>';
+				echo '<Br>';
+				echo '<table style="width:100%">';
+
+				
+				
+				//I keep the remove button here as admin might use it, for example a staff is sick on 5 sep 2015, need to re-assign to other staff
+				//echo '<td style="text-align: center; vertical-align: middle">Remove</td></tr>';
+				
+				//loop through all the admin assigned list here.
+				foreach ($houses as $property)
+				{
+					echo '<tr>';
+					echo '<td colspan = "2"><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></td>';
+					echo '</tr>';
+					echo '<tr>';
+					echo '<td>', $property['inspection_time1'], '</td>';
+					echo '</tr>';
+					echo '<tr>';
+					echo '<td>', $property['inspection_time2'], '</td>';
+					echo '</tr>';
+				}
+						
+				//end tags
+			
+				echo '</table>';
+			}			
+			if ($count_register > 0)
+			{
+				echo '<HR></HR>';
+				echo '<H3>Registered inspections times</H3>';
+				echo '<Br>';
+				echo '<table style="width:100%">';
+				
+				foreach ($inspection_regs as $register)
+				{
+					$p_id = $register['propertyid'];
+					try
+					{
+						$pdo2 = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
+						$pdo2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						$properties = $pdo2->query("SELECT * FROM property_details WHERE propertyid = '$p_id' ORDER BY SUBURB")->fetchAll(PDO::FETCH_ASSOC);
+					
+						foreach ($properties as $property)
+						{
+							echo '<tr>';
+							echo '<td colspan = "2"><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></td>';
+							
+						}
+						echo '<td>', $register['time'], '</td>';
+					}
+					catch(PDOException $e)
+					{
+						echo $e->getMessage();
+					}
+					
+				}
+				echo '</tr>';
+			}
+				echo '</table>';
 		  ?>
 		  
 		  </br>
