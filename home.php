@@ -16,7 +16,6 @@
 <div id="outside">
 	<div id="header">
 		<br>
-		
 
 			<div id="Menu">
 			<?php include 'menu.php'; ?>
@@ -126,7 +125,8 @@
 					if ( isset($_SESSION['FirstName']))
 					{
 						echo "<br>Welcome, ", $_SESSION['FirstName'], "</br>";
-						echo '<a href="tenant_profile.php" class="current"> View Profile </a>';
+						echo '<a href="tenant_profile.php" class="current"> View Profile </a>
+						| <a href="create_property.php" class="current"> My Property </a>';
 					}
 					?>
 					<h3> News </h3>
