@@ -14,6 +14,9 @@
     </script>';
   }
 
+
+
+
 ?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,7 +45,7 @@
 	</div> <!---secondBanner -->
   <?php
 		//allows admin to make changes to any employees profile including their own.
-  		if($_SESSION['UserType'] == "Admin")
+  		if(isset($_SESSION['e_id']))
 		{
 			if (isset($_GET['ID']))
 			{
@@ -66,6 +69,7 @@
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		if ($propertyownnerid != 0)
 		{
+			
 			$stmt = $conn->prepare('SELECT  * FROM `propertyowner_details` WHERE `propertyownerid` = :oid');
 			$stmt->bindParam(':oid', $propertyownnerid, PDO::PARAM_STR);
 		}
@@ -120,7 +124,7 @@
 			{
 				
 				//If the user is the admin account gives them the choice choose an employee
-				 if($_SESSION['UserType'] == "Admin") 
+				 if(isset($_SESSION['e_id'])) 
 				 {
 					$employeelist = $pdo->query("SELECT * FROM propertyowner_details")->fetchAll(PDO::FETCH_ASSOC);
 
@@ -140,7 +144,16 @@
 			}
 			$pdo = null;
 			
-			if ($propertyownnerid != $_SESSION['e_id'])
+			if (isset($_SESSION['o_id']))
+			{
+				$ownerid = $_SESSION['o_id'];
+			}
+			else
+			{
+				$ownerid = 0;
+			}
+			
+			if ($propertyownnerid != $ownerid)
 			{
 				echo '<h3>Employee Details</h3><br>';
 			}
