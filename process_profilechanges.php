@@ -54,7 +54,15 @@ include 'connection.php';
           $dob = $_POST["dob"];
           $phone = $_POST["phone"];
           $postcode = $_POST["postcode"];
-		  $favourites = $_POST["favourite"];
+		  
+		  if (isset($_POST["favourite"]))
+		  {
+			$favourites = $_POST["favourite"];
+		  }
+		  else
+		  {
+			  	$favourites = array();
+		  }
 			
 		//builds are connection to the database and updates all the fields with the new information.
           $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
