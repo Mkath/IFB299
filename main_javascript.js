@@ -205,3 +205,92 @@ function validate_createproperty(form){
 
 	return validation;
 }
+//this function is validation changes to the existing property
+function validate_propertychanges(form){
+	var validation = true;
+	if (form.address.value == ""){
+		document.getElementById("addressERROR").style.visibility = "visible";
+		form.address.focus();
+		validation = false;
+	}
+	if (form.suburb.value == ""){
+		document.getElementById("suburbERROR").style.visibility = "visible";
+		form.suburb.focus();
+		validation = false;
+	}
+	if (form.roomnumber.value == ""){
+		document.getElementById("roomnumberERROR").style.visibility = "visible";
+		form.roomnumber.focus();
+		validation = false;
+	}
+	if (form.bathroom_number.value == ""){
+		document.getElementById("bathroom_numberERROR").style.visibility = "visible";
+		form.bathroom_number.focus();
+		validation = false;
+	}
+	if (form.rent_amt.value == ""){
+		document.getElementById("rent_amountERROR").style.visibility = "visible";
+		form.rent_amt.focus();
+		validation = false;
+	}
+	if (form.description.value == ""){
+		document.getElementById("descriptionERROR").style.visibility = "visible";
+		form.description.focus();
+		validation = false;
+	}
+	if (form.inspection_time1.value == ""){
+		document.getElementById("inspection_time1ERROR").style.visibility = "visible";
+		form.inspection_time1.focus();
+		validation = false;
+	}
+	if (form.inspection_time2.value == ""){
+		document.getElementById("inspection_time2ERROR").style.visibility = "visible";
+		form.inspection_time2.focus();
+		validation = false;
+	}
+	if (form.image_description.value == "" & form.file.value != ""){
+		document.getElementById("fileERROR").style.visibility = "visible";
+		validation = false;
+	}
+	if (form.image_description.value != "" & form.file.value == ""){
+		document.getElementById("image_descriptionERROR").style.visibility = "visible";
+		form.image_description.focus();
+		validation = false;
+	}
+	//next section gets repetitive. First two are for first image and description
+	if (form.image_description2.value == "" & form.file2.value != ""){
+		document.getElementById("image_description2ERROR").style.visibility = "visible";
+		form.image_description2.focus();
+		validation = false;
+	}
+	if (form.image_description2.value != "" & form.file2.value == ""){
+		document.getElementById("image_description2ERROR").style.visibility = "visible";
+		form.image_description2.focus();
+		validation = false;
+	}
+	//next two are for the second image/description
+	if (form.image_description3.value == "" & form.file3.value != ""){
+		document.getElementById("image_description2ERROR").style.visibility = "visible";
+		form.image_description3.focus();
+		validation = false;
+	}
+	if (form.image_description3.value != "" & form.file3.value == ""){
+		document.getElementById("image_description2ERROR").style.visibility = "visible";
+		form.image_description3.focus();
+		validation = false;
+	}
+	//final two are for the 4th image/description
+	if (form.image_description4.value == "" & form.file4.value != ""){
+		document.getElementById("image_description2ERROR").style.visibility = "visible";
+		form.image_description4.focus();
+		validation = false;
+	}
+	if (form.image_description4.value != "" & form.file4.value == ""){
+		document.getElementById("image_description2ERROR").style.visibility = "visible";
+		form.image_description4.focus();
+		validation = false;
+	}
+
+
+	return validation;
+}
