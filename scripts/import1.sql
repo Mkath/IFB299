@@ -44,7 +44,7 @@ CREATE TABLE `tenant_details` (
 	`tenant_postal` Int NOT NULL,
 	`tenant_username` varchar(50) NOT NULL,
 	`tenant_password` varchar(50) NOT NULL,	
-  PRIMARY KEY (`tenantid`)
+  PRIMARY KEY (`tenantid`),
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 );
 
@@ -82,6 +82,19 @@ FOREIGN KEY (tenantid) REFERENCES tenant_details(tenantid)
 );
 
 
+CREATE TABLE `propertyowner_details` (
+	`propertyownerid` int NOT NULL AUTO_INCREMENT,	
+	`propertyowner_firstname` varchar(50) NOT NULL,
+	`propertyowner_lastname` varchar(50) NOT NULL,	
+	`propertyowner_dob` date NOT NULL,
+	`propertyowner_phone` varchar(50) NOT NULL,
+	`propertyowner_email` varchar(50) NOT NULL,
+	`propertyowner_postal` Int NOT NULL,
+	`propertyowner_username` varchar(50) NOT NULL,
+	`propertyowner_password` varchar(50) NOT NULL,	
+  PRIMARY KEY (`propertyownerid`)
+);
+
 CREATE TABLE `employee_details` (
 	`employeeid` int NOT NULL AUTO_INCREMENT,	
 	`employee_firstname` varchar(50) NOT NULL,
@@ -105,18 +118,6 @@ FOREIGN KEY (employeeid) REFERENCES employee_details(employeeid)
 );
 
 
-CREATE TABLE `propertyowner_details` (
-	`propertyownerid` int NOT NULL AUTO_INCREMENT,	
-	`propertyowner_firstname` varchar(50) NOT NULL,
-	`propertyowner_lastname` varchar(50) NOT NULL,	
-	`propertyowner_dob` date NOT NULL,
-	`propertyowner_phone` varchar(50) NOT NULL,
-	`propertyowner_email` varchar(50) NOT NULL,
-	`propertyowner_postal` Int NOT NULL,
-	`propertyowner_username` varchar(50) NOT NULL,
-	`propertyowner_password` varchar(50) NOT NULL,	
-  PRIMARY KEY (`propertyownerid`)
-);
 
 
 CREATE TABLE `propertyowner_property` (
