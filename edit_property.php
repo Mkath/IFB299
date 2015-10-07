@@ -196,7 +196,7 @@
                       foreach ($stmt2 as $images){
                         //echo '<input type="text" name="image_description" placeholder = "Description" style="width: 150px" value = ', $images["image_description"],'><br>';
                         echo '<a href="/images/', $images['image_path'],'" target="_blank" >';
-            						echo '<img style="float: left; margin: 15px 15px 15px 15px; width: 150px;height: 100px;border:0" src="/images/',$images['image_path'], '" alt="', $images['image_description'], '">';
+            						echo '<img style="float: left; margin: 30px 30px 30px 30px; width: 150px;height: 100px;border:0" src="/images/',$images['image_path'], '" alt="', $images['image_description'], '">';
             						echo '</a>';
                       }
                     ?>
