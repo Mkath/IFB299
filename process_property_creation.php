@@ -56,7 +56,20 @@
 
   // now let's move the file to its final location and allocate the new filename to it
   @move_uploaded_file($_FILES[$fieldname]['tmp_name'], $uploadFilename);
+
       //or error('receiving directory insuffiecient permission', $uploadForm);
+  // if ($_POST["image_description"] != ""){
+  //   $fieldname2 = 'file2';
+  //   @is_uploaded_file($_FILES[$fieldname2]['tmp_name']);
+  //   @getimagesize($_FILES[$fieldname]['tmp_name']);
+  //
+  //   $now = time();
+  //   while(file_exists($uploadFilename2 = $uploadsDirectory.$now.'-'.$_FILES[$fieldname2]['name']))
+  //   {
+  //       $now++;
+  //   }
+  //   @move_uploaded_file($_FILES[$fieldname2]['tmp_name'], $uploadFilename);
+  // }
 
   // If you got this far, everything has worked and the file has been successfully saved.
   // We are now going to redirect the client to a success page.
