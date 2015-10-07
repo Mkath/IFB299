@@ -165,7 +165,10 @@
 		<?php
 		foreach ($stmt as $owner)
 		{
-		
+		if ($propertyownnerid == 0)
+		{
+			$propertyownnerid = $owner['propertyownerid'];
+		}
 		echo '<form name="profile_changes" method="POST"  action="process_propertyowner_changes.php?ID=', $propertyownnerid, '" onsubmit="return validate_profilechanges(profile_changes)">';
 		
 		?>

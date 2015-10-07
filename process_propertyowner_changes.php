@@ -4,7 +4,8 @@ include 'connection.php';
     session_start();
 	}
 
-  if(!isset($_SESSION['e_id'])) {
+  if(!isset($_SESSION['o_id']) && (!isset($_SESSION['e_id']))) 
+  {
     echo '<script type="text/javascript">
     alert("Forbidden");
     window.location.href = "signin.php";

@@ -87,9 +87,11 @@ include 'connection.php';
 					echo '<hr></hr>';
 					echo '<h3>Property Functions</h3><p>';
 					echo '<a href="Create_property.php">Create new property</a><p>';
-					//echo '<a href="main_11.css">Edit existing property</a><p>';
-					echo '<a href="assign_property.php">Assign tenant/employee/owner to a property</a><p>';
 					
+					if ($_SESSION['UserType'] == "Admin")
+					{
+						echo '<a href="assign_property.php">Assign tenant/employee/owner to a property</a><p>';
+					}
 					echo '<HR></HR>';
 				}
 				
