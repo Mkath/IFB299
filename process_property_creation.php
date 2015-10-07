@@ -56,7 +56,20 @@
 
   // now let's move the file to its final location and allocate the new filename to it
   @move_uploaded_file($_FILES[$fieldname]['tmp_name'], $uploadFilename);
+
       //or error('receiving directory insuffiecient permission', $uploadForm);
+  // if ($_POST["image_description"] != ""){
+  //   $fieldname2 = 'file2';
+  //   @is_uploaded_file($_FILES[$fieldname2]['tmp_name']);
+  //   @getimagesize($_FILES[$fieldname]['tmp_name']);
+  //
+  //   $now = time();
+  //   while(file_exists($uploadFilename2 = $uploadsDirectory.$now.'-'.$_FILES[$fieldname2]['name']))
+  //   {
+  //       $now++;
+  //   }
+  //   @move_uploaded_file($_FILES[$fieldname2]['tmp_name'], $uploadFilename);
+  // }
 
   // If you got this far, everything has worked and the file has been successfully saved.
   // We are now going to redirect the client to a success page.
@@ -97,12 +110,10 @@
   foreach ($stmt2 as $row)
   {
     $pid = $row['propertyid'];
-    echo $pid;
 
     $file_name = $now.'-'.$_FILES[$fieldname]['name'];
     $description = $_POST["image_description"];
 
-    echo $file_name, $description;
 
     $conn = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
     $stmt = $conn->prepare("INSERT INTO `property_images` (image_description, image_path, propertyid)
@@ -111,6 +122,11 @@
     $stmt->bindParam(':description', $description, PDO::PARAM_STR);
     $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
     $stmt->execute();
+
+    echo '<script type="text/javascript">
+    alert("Your Property has Successfully been Created");
+    window.location.href = "home.php";
+    </script>';
   }
 
   //

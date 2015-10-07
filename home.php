@@ -125,8 +125,10 @@
 					if ( isset($_SESSION['FirstName']))
 					{
 						echo "<br>Welcome, ", $_SESSION['FirstName'], "</br>";
-						echo '<a href="tenant_profile.php" class="current"> View Profile </a>
-						| <a href="create_property.php" class="current"> My Property </a>';
+						echo '<a href="tenant_profile.php" class="current"> View Profile </a>';
+						if ($_SESSION['UserType'] != "Owner"){
+							echo '| <a href="create_property.php" class="current"> Create New Property </a>';
+						}
 					}
 					?>
 					<h3> News </h3>

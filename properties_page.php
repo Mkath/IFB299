@@ -8,7 +8,7 @@ include 'connection.php';
 	}
 
 	$p_id = $_GET['ID'];
-	
+
 	if (isset($_SESSION['t_id']))
 	{
 		$tenantid = $_SESSION['t_id'];
@@ -22,32 +22,32 @@ include 'connection.php';
 					//connection to the database
 					$pdo = new PDO("mysql:host=$dbhost;dbname=$dbname",$dbuser,$dbpass);
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					
+
 					//get all the property details, images and favourites that relate to that property
 					$recordset = $pdo->query("SELECT * FROM property_details WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
 					$recordimages = $pdo->query("SELECT * FROM property_images WHERE propertyid = '$p_id'")->fetchAll(PDO::FETCH_ASSOC);
-					
+
 					//Get the count of the favourites for validation
 					$favs = $pdo->prepare("SELECT count(*) FROM tenant_favourites WHERE propertyid = '$p_id' AND tenantid = $tenantid");
 					$favs->execute();
 					$favourite_count = $favs->fetchColumn();
-					
+
 					//Get the count of all the property details for validation
 					$recCount = $pdo->prepare("SELECT count(*) FROM property_details WHERE propertyid = '$p_id'");
 					$recCount->execute();
 					$num_properties = $recCount->fetchColumn();
-					
+
 					//Get the count of all the inspections for that customer for validation
 					$inspectionCount = $pdo->prepare("SELECT count(*) FROM tenant_registration WHERE propertyid = '$p_id' AND tenantid = '$tenantid'");
 					$inspectionCount->execute();
 					$num_inspections = $inspectionCount->fetchColumn();
 
 					//Gets the count of all the contract_details for that property
-					$Contracts = $pdo->query("SELECT Count(*) FROM contract_details WHERE propertyid = '$p_id' AND tenantid = '$tenantid' ");			
+					$Contracts = $pdo->query("SELECT Count(*) FROM contract_details WHERE propertyid = '$p_id' AND tenantid = '$tenantid' ");
 					$Contracts->execute();
 					$num_Contracts = $Contracts->fetchColumn();
-					
-				
+
+
 				}
 
 			catch(PDOException $e)
@@ -69,10 +69,10 @@ include 'connection.php';
 <div id="outside">
 	<div id="header">
 		<br>
-		
+
 
 			<div id="Menu">
-		
+
 				<?php include 'menu.php'; ?>
 			</div> <!--Menu -->
 
@@ -94,7 +94,7 @@ include 'connection.php';
 					foreach ($recordimages as $image)
 					{
 						echo '<a href="/images/', $image['image_path'],'" target="_blank" >';
-						echo '<img style="float: left; margin: 15px 15px 15px 15px; width: 150px;height: 100px;border:0" src="/images/',$image['image_path'], '" alt="', $image['image_decription'], '">';
+						echo '<img style="float: left; margin: 15px 15px 15px 15px; width: 150px;height: 100px;border:0" src="/images/',$image['image_path'], '" alt="', $image['image_description'], '">';
 						echo '</a>';
 					}
 
@@ -118,7 +118,7 @@ include 'connection.php';
 
 					echo "<h1>$",$record['rent_amt'], " Weekly</h1>";
 					echo "<h3>",$record['street_address'],", ",$record['suburb'],  "</h3>";
-					
+
 					// Check to see if the user has logged in first
 					if ($tenantid == 0)
 					{
@@ -130,7 +130,7 @@ include 'connection.php';
 					{
 						echo '<form name="registration" method="POST"  action="favourite_page.php?ID=',$p_id, '&method=remove"', 'onsubmit="">';
 						echo '<p><input class="favourite_page" type="submit" value="Unfavourite this page"> </p>';
-						echo '</form>';	
+						echo '</form>';
 					}
 					else
 					{
@@ -139,27 +139,27 @@ include 'connection.php';
 						echo '<p><input class="favourite_page" type="submit" value="Favourite this page"> </p>';
 						echo '</form>';
 					}
-					
 
-	
+
+
 					if (isset($record['gumtree_url']))
 					{
 						echo '<p><a href="',$record['gumtree_url'],'" target="_blank">View property on gumtree</a></p>';
 					}
-					
-					
+
+
 					echo "<hr></hr>";
-					
-					
+
+
 					echo '<p><b>Available inspection times:</b>', "</p>";
 					// just display inspection times if the user isnt logged in
 					if ($tenantid == 0)
 					{
 						echo "<p>", $record['inspection_time1'], '</p>';
 						echo "<p>", $record['inspection_time2'], "</p>";
-					
+
 					}
-					
+
 					else
 					{
 						//otherwise build a select box
@@ -171,7 +171,7 @@ include 'connection.php';
 							echo '<option value="', $inspection['inspection_time1'], '">', $inspection['inspection_time1'], '</option>';
 							echo '<option value="', $inspection['inspection_time2'], '">', $inspection['inspection_time2'], '</option>';
 							echo '</select>';
-							
+
 							//only display the book inspections button if the user has not already chosen an inspection
 							if ($num_inspections == 0)
 							{
@@ -185,8 +185,8 @@ include 'connection.php';
 						}
 						echo '</form>';
 					}
-					echo "<HR></HR>";					
-					
+					echo "<HR></HR>";
+
 					echo "<p><b>Property Type: </b>",$record['property_type'],  "</p>";
 					echo "<p><b>Number of Rooms: </b>",$record['number_rooms'],  "</p>";
 					echo "<p><b>Number of bathrooms: </b>",$record['number_bathrooms'],  "</p>";
@@ -209,7 +209,7 @@ include 'connection.php';
 					{
 						echo '<P>Contract Details</p>';
 						echo '<p><a href="contractDetails.php?ID=',$p_id, '" >Click here to view your contract details</a></p>';
-						
+
 					}
 				}
 			}
