@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <?php
   include 'connection.php';
   if(!isset($_SESSION)){
@@ -191,14 +190,14 @@
                   </p>
                   <br>
                   <!-- <p>
-                    Your Current Property Images<br>
+                    //Your Current Property Images<br>
                     //<?php
                       //foreach ($stmt2 as $images){
                         //echo '<input type="text" name="image_description" placeholder = "Description" style="width: 150px" value = ', $images["image_description"],'><br>';
                         //echo '<a href="/images/', $images['image_path'],'" target="_blank" >';
             						//echo '<img style="float: left; margin: 30px 30px 30px 30px; width: 150px;height: 100px;border:0" src="/images/',$images['image_path'], '" alt="', $images['image_description'], '">';
             						//echo '</a>';
-                      }
+                      //}
                     //?>
                   </p>
                   <p>
