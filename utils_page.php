@@ -86,7 +86,7 @@ include 'connection.php';
 					echo '<a href="employee_profile.php?ID=',$_SESSION['e_id'],'">View profile</a><p>';
 					echo '<hr></hr>';
 					echo '<h3>Property Functions</h3><p>';
-					echo '<a href="Create_property.php">Create new property</a><p>';
+					echo '<a href="Create_Property.php">Create new property</a><p>';
 					
 					if ($_SESSION['UserType'] == "Admin")
 					{
@@ -118,7 +118,7 @@ include 'connection.php';
 					echo '<a href="owner_profile.php?ID=',$_SESSION['o_id'],'">View profile</a><p>';
 					echo '<hr></hr>';
 					echo '<h3>Property Functions</h3><p>';
-					echo '<a href="Create_property.php">Create new property</a><p>';
+					echo '<a href="Create_Property.php">Create new property</a><p>';
 					//echo '<a href="main_11.css">Edit existing property</a><p>';
 					echo '<hr></hr>';					
 					echo "<h3>Current properties that I own</h3>";
@@ -141,7 +141,7 @@ include 'connection.php';
 					foreach ($properties as $property)
 					{
 						echo '<td><a href="properties_page.php?ID=', $property['propertyid'], '">', $property['street_address'],", ", $property['suburb'] , '</a></td>';
-						echo '<td><a href="edit_property?ID=', $property['propertyid'],'">Edit</a></td>';
+						echo '<td><a href="edit_property.php?ID=', $property['propertyid'],'">Edit</a></td>';
 					}
 					echo '</tr>';
 				}
