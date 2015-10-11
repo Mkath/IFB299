@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <?php
   include 'connection.php';
   if(!isset($_SESSION)){
@@ -53,11 +52,11 @@
 		  $_SESSION['inspection_time2'] = $row['inspection_time2'];
 		}
 
-    $conn2 = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-		$conn2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$stmt2 = $conn2->prepare('SELECT * FROM `property_images` WHERE `propertyid` = :ID');
-		$stmt2->bindParam(':ID', $propertyid, PDO::PARAM_STR);
-		$stmt2->execute();
+    // $conn2 = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		// $conn2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		// $stmt2 = $conn2->prepare('SELECT * FROM `property_images` WHERE `propertyid` = :ID');
+		// $stmt2->bindParam(':ID', $propertyid, PDO::PARAM_STR);
+		// $stmt2->execute();
 	}
 	//errors if it cannot make a connection to the database
 	catch(PDOException $e)
@@ -190,16 +189,16 @@
                       <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>">
                   </p>
                   <br>
-                  <p>
-                    Your Current Property Images<br>
-                    <?php
-                      foreach ($stmt2 as $images){
+                  <!-- <p>
+                    //Your Current Property Images<br>
+                    //<?php
+                      //foreach ($stmt2 as $images){
                         //echo '<input type="text" name="image_description" placeholder = "Description" style="width: 150px" value = ', $images["image_description"],'><br>';
-                        echo '<a href="/images/', $images['image_path'],'" target="_blank" >';
-            						echo '<img style="float: left; margin: 30px 30px 30px 30px; width: 150px;height: 100px;border:0" src="/images/',$images['image_path'], '" alt="', $images['image_description'], '">';
-            						echo '</a>';
-                      }
-                    ?>
+                        //echo '<a href="/images/', $images['image_path'],'" target="_blank" >';
+            						//echo '<img style="float: left; margin: 30px 30px 30px 30px; width: 150px;height: 100px;border:0" src="/images/',$images['image_path'], '" alt="', $images['image_description'], '">';
+            						//echo '</a>';
+                      //}
+                    //?>
                   </p>
                   <p>
                   </p>
@@ -223,7 +222,7 @@
                     <input type="text" name="image_description3" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_description2ERROR')"><input id="file3" type="file" name="file3">
                     <input type="text" name="image_description4" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_description2ERROR')"><input id="file4" type="file" name="file4"><br>
                     <span id="image_description2ERROR" style="color:red; visibility:hidden">*An description of your chosen image is required</span>
-                  </p>
+                  </p> -->
 
                   <p>
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input id="submit" type="submit" name="submit" value="Save Changes">
