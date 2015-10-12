@@ -54,8 +54,6 @@ if (isset($_POST['submit'])) {
 	       if (($_FILES["file"]["size"][$i] < 100000) //Approx. 100kb files can be uploaded.
                 && in_array($file_extension, $validextensions)) {
             if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $target_path)) {//if file moved to uploads folder
-                echo '<span id="noerror">',$img_path,'</span><br/><br/>';
-                echo $property_id;
                 $stmt3 = $conn3->prepare("INSERT INTO `property_images` (image_path, propertyid)
                 VALUES (:img_path, :property_id)");
                 $stmt3->bindParam(':img_path', $img_path, PDO::PARAM_STR);
@@ -70,5 +68,9 @@ if (isset($_POST['submit'])) {
             echo $j. ').<span id="error">***Invalid file Size or Type***</span><br/><br/>';
         }
     }
+    echo '<script type="text/javascript">
+    alert("Your Property Has been Created");
+    window.location.href = "utils_page.php";
+    </script>';
 }
 ?>
