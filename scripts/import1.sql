@@ -26,7 +26,6 @@ CREATE TABLE `property_details` (
 CREATE TABLE `property_images` (
 	`imageid` int NOT NULL AUTO_INCREMENT,	
 	`propertyid` int NOT NULL,
-	`image_decription` varchar(20) NOT NULL,
 	`image_path` varchar(50) NOT NULL,
   PRIMARY KEY (`imageid`),
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
