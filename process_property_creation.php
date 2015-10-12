@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
         $img_path = md5(uniqid()) . "." . $ext[count($ext) - 1];
 		    $target_path = $folder_path . $img_path;//set the target path with a new name of image
         $j = $j + 1;//increment the number of uploaded images according to the files in array
-	       if (($_FILES["file"]["size"][$i] < 100000) //Approx. 100kb files can be uploaded.
+	       if (($_FILES["file"]["size"][$i] < 100000000) //Approx. 100mb files can be uploaded.
                 && in_array($file_extension, $validextensions)) {
             if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $target_path)) {//if file moved to uploads folder
                 $stmt3 = $conn3->prepare("INSERT INTO `property_images` (image_path, propertyid)

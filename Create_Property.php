@@ -56,7 +56,7 @@ include 'connection.php';
                 <hr>
                 <form name="Upload" onsubmit="return validate_createproperty(Upload)" enctype="multipart/form-data" action="process_property_creation.php" method="post">
                   <p>
-                    Primary Image of your Property: <br>Only JPEG,PNG,JPG extensions. Max size 100KB.<br>
+                    Primary Image of your Property: <br>Only JPEG,PNG,JPG extensions. Max size 100MB.<br>
                     <div id="filediv"><input name="file[]" type="file" id="file"/></div><br/>
                   <br>
                     <input type="button" id="add_more" class="upload" value="Add More Images"/>
