@@ -159,49 +159,6 @@ function validate_createproperty(form){
 		form.inspection_time2.focus();
 		validation = false;
 	}
-	if (form.file.value == ""){
-		document.getElementById("fileERROR").style.visibility = "visible";
-		validation = false;
-	}
-	if (form.image_description.value == ""){
-		document.getElementById("image_descriptionERROR").style.visibility = "visible";
-		form.image_description.focus();
-		validation = false;
-	}
-	//next section gets repetitive. First two are for first image and description
-	if (form.image_description2.value == "" & form.file2.value != ""){
-		document.getElementById("image_description2ERROR").style.visibility = "visible";
-		form.image_description2.focus();
-		validation = false;
-	}
-	if (form.image_description2.value != "" & form.file2.value == ""){
-		document.getElementById("image_description2ERROR").style.visibility = "visible";
-		form.image_description2.focus();
-		validation = false;
-	}
-	//next two are for the second image/description
-	if (form.image_description3.value == "" & form.file3.value != ""){
-		document.getElementById("image_description2ERROR").style.visibility = "visible";
-		form.image_description3.focus();
-		validation = false;
-	}
-	if (form.image_description3.value != "" & form.file3.value == ""){
-		document.getElementById("image_description2ERROR").style.visibility = "visible";
-		form.image_description3.focus();
-		validation = false;
-	}
-	//final two are for the 4th image/description
-	if (form.image_description4.value == "" & form.file4.value != ""){
-		document.getElementById("image_description2ERROR").style.visibility = "visible";
-		form.image_description4.focus();
-		validation = false;
-	}
-	if (form.image_description4.value != "" & form.file4.value == ""){
-		document.getElementById("image_description2ERROR").style.visibility = "visible";
-		form.image_description4.focus();
-		validation = false;
-	}
-
 
 	return validation;
 }

@@ -1,55 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
 <?php
-  include 'connection.php';
-  // make a note of the current working directory relative to root.
-  $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-
-  // make a note of the location of the upload handler script
-  $uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'process_property_creation.php';
-
-  // set a max file size for the html upload form
-  $max_file_size = 30000; // size in bytes
-
-  // now echo the html page
+include 'connection.php';
 ?>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <!-- <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"> -->
 
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title> Welcome to Rent property </title>
-        <link href="main_11.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="main_javascript.js"></script>
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> Welcome to Rent property </title>
+    <link href="main_11.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript" src="main_javascript.js"></script>
+</head>
 
-    <body>
-      <div id="outside">
-      	<div id="header">
-      		<br>
+<body>
 
-      			<div id="Menu">
-      				<ul>
-      					<?php include 'menu.php'; ?>
-      				</ul>
-      			</div> <!--Menu -->
+<div id="outside">
+	<div id="header">
+		<br>
 
-      	</div> <!--header -->
+			<div id="Menu">
+				<ul>
+					<?php include 'menu.php'; ?>
+				</ul>
+			</div> <!--Menu -->
 
-
-      	<div id="secondBanner">
-
-      		<img src="images/house3.jpg" width="770" height="90" alt="welcome to Property Service"/>
-      	</div> <!---secondBanner -->
+	</div> <!--header -->
 
 
-      	<div id="bigContent">
-      			<div id="secondContent">
-              <form id="Upload" name="Upload" action="<?php echo $uploadHandler ?>" onsubmit="return validate_createproperty(Upload)" enctype="multipart/form-data" method="post">
+	<div id="secondBanner">
 
-                  <h1>
-                      Property Information
-                  </h1>
+		<img src="images/house3.jpg" width="770" height="90" alt="welcome to Property Service"/>
+	</div> <!---secondBanner -->
+
+
+	<div id="bigContent">
+			<div id="secondContent">
+        <div id="maindiv">
+
+            <div id="formdiv">
+                <h2>Property Information</h2>
+                <hr>
+                <form name="Upload" onsubmit="return validate_createproperty(Upload)" enctype="multipart/form-data" action="process_property_creation.php" method="post">
+                  <p>
+                    Primary Image of your Property: <br>Only JPEG,PNG,JPG extensions. Max size 100KB.<br>
+                    <div id="filediv"><input name="file[]" type="file" id="file"/></div><br/>
+                  <br>
+                    <input type="button" id="add_more" class="upload" value="Add More Images"/>
+                  </p>
                   <p>
                     Street Address<br>
                     <input type="text" name="address" placeholder = "123 example street" style="width: 500px" onkeypress="invisible('addressERROR')"><br>
@@ -107,66 +104,47 @@
                     <input type="text" name="inspection_time2" placeholder = "16 September 2015 12:15 - 12:30" style="width: 300px" onkeypress="invisible('inspection_time2ERROR')"><br>
                     <span id="inspection_time2ERROR" style="color:red; visibility:hidden">*2nd Inspection Time is a Required Field</span>
                   </p>
-                  <p>
-                      <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size ?>">
-                  </p>
-                  <br>
-                  <p>
-                      <label for="file">Primary Image of your Property:</label>
-                      <input id="file" type="file" name="file" onclick="invisible('fileERROR')"><br>
-                      <span id="fileERROR" style="color:red; visibility:hidden">*An image of your property is required</span>
-                  </p>
-                  <p>
-                    Image Description:
-                    <input type="text" name="image_description" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_descriptionERROR')"><br>
-                    <span id="image_descriptionERROR" style="color:red; visibility:hidden">*An description of your property is required</span>
-                  </p>
-                  <p>
-                    <label for="file">Secondary set of images of your Property (Optional, Max. 3):</label>
-                    <input type="text" name="image_description2" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_description2ERROR')"><input id="file2" type="file" name="file2">
-                    <input type="text" name="image_description3" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_description2ERROR')"><input id="file3" type="file" name="file3">
-                    <input type="text" name="image_description4" placeholder = "Description" style="width: 150px" onkeypress="invisible('image_description2ERROR')"><input id="file4" type="file" name="file4"><br>
-                    <span id="image_description2ERROR" style="color:red; visibility:hidden">*An description of your chosen image is required</span>
-                  </p>
 
                   <p>
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input id="submit" type="submit" name="submit" value="Create Property">
+                    <input type="submit" value="Create Property" name="submit" id="upload" class="upload"/>
                   </p>
+                </form>
+                <br/>
+                <br/>
+            </div>
 
-              </form>
+		   <!-- Right side div -->
 
-
-      				<br>
-      				<br>
-      				<br>
-      				<br>
-
-
-      			</div>
-
-      				<div id="news">
-
+        </div>
+				<br>
+				<br>
+				<br>
+				<br>
 
 
+			</div>
+
+				<div id="news">
 
 
-      					<p class="clear"></p>
-
-      				</div><!--news-->
-
-      	</div> <!---contentOne -->
 
 
-      </div> <!--outside -->
 
-      		<div id="footer">
-      			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp;
-      				<a href="privacy.html"> Privacy Policy</a>
-      				<a href="term.html"> Terms and Conditions</a>
-      			</p>
-      		</div>
+					<p class="clear"></p>
+
+				</div><!--news-->
+
+	</div> <!---contentOne -->
 
 
-    </body>
+</div> <!--outside -->
 
+		<div id="footer">
+			<p> &#169; Rental Service Company &nbsp; Group 93 IFB299 &nbsp;&nbsp;
+				<a href="privacy.html"> Privacy Policy</a>
+				<a href="term.html"> Terms and Conditions</a>
+			</p>
+		</div>
+
+</body>
 </html>

@@ -94,7 +94,7 @@ include 'connection.php';
 					foreach ($recordimages as $image)
 					{
 						echo '<a href="/images/', $image['image_path'],'" target="_blank" >';
-						echo '<img style="float: left; margin: 15px 15px 15px 15px; width: 150px;height: 100px;border:0" src="/images/',$image['image_path'], '" alt="', $image['image_description'], '">';
+						echo '<img style="float: left; margin: 15px 15px 15px 15px; width: 150px;height: 100px;border:0" src="/images/',$image['image_path'], '">';
 						echo '</a>';
 					}
 
