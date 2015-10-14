@@ -124,11 +124,24 @@
 					<?php
 					if ( isset($_SESSION['FirstName']))
 					{
+						//check to see what type of user they are owner/tenant/employee and create a view property link on the home page
 						echo "<br>Welcome, ", $_SESSION['FirstName'], "</br>";
-						echo '<a href="tenant_profile.php" class="current"> View Profile </a>';
-						if ($_SESSION['UserType'] != "Owner"){
-							echo '| <a href="create_property.php" class="current"> Create New Property </a>';
+						if (isset($_SESSION['e_id']))
+						{
+							echo '<a href="employee_profile.php?ID=',$_SESSION['e_id'],'">View profile</a><p>';
 						}
+						elseif (isset($_SESSION['o_id']))
+						{
+							echo '<a href="owner_profile.php?ID=',$_SESSION['o_id'],'">View profile</a><p>';
+						}
+						else
+						{
+							echo '<a href="tenant_profile.php" class="current"> View Profile </a>';
+						}
+						
+						/*if ($_SESSION['UserType'] != "Owner"){
+							echo '| <a href="create_property.php" class="current"> Create New Property </a>';
+						} */
 					}
 					?>
 					<h3> News </h3>
