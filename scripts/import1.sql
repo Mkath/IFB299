@@ -42,7 +42,8 @@ CREATE TABLE `tenant_details` (
 	`tenant_email` varchar(50) NOT NULL,
 	`tenant_postal` Int NOT NULL,
 	`tenant_username` varchar(50) NOT NULL,
-	`tenant_password` varchar(50) NOT NULL,	
+	`tenant_password` varchar(64) NOT NULL,
+	`salt` VARCHAR(64) NOT NULL DEFAULT '4b3683669fea3',
   PRIMARY KEY (`tenantid`),
 FOREIGN KEY (propertyid) REFERENCES property_details(propertyid)
 );
@@ -90,7 +91,8 @@ CREATE TABLE `propertyowner_details` (
 	`propertyowner_email` varchar(50) NOT NULL,
 	`propertyowner_postal` Int NOT NULL,
 	`propertyowner_username` varchar(50) NOT NULL,
-	`propertyowner_password` varchar(50) NOT NULL,	
+	`propertyowner_password` varchar(64) NOT NULL,
+	`salt` VARCHAR(64) NOT NULL DEFAULT '4b3683669fea3',	
   PRIMARY KEY (`propertyownerid`)
 );
 
@@ -103,8 +105,9 @@ CREATE TABLE `employee_details` (
 	`employee_email` varchar(50) NOT NULL,
 	`employee_postal` Int NOT NULL,
 	`employee_username` varchar(50) NOT NULL,
-	`employee_password` varchar(50) NOT NULL,
-	`employee_admin` BOOLEAN NOT NULL Default 0,	
+	`employee_password` varchar(64) NOT NULL,
+	`employee_admin` BOOLEAN NOT NULL Default 0,
+	`salt` VARCHAR(64) NOT NULL DEFAULT '4b3683669fea3',	
   PRIMARY KEY (`employeeid`)
 );
 
@@ -155,21 +158,21 @@ insert into property_details (street_address,suburb,number_rooms,property_type,f
 
 
 
-insert into property_images (propertyid, image_decription, image_path) values ('1', 'Bedroom','bed1.jpg');
-insert into property_images (propertyid, image_decription, image_path) values ('1', 'kitchen','kit1.jpg');
-insert into property_images (propertyid, image_decription, image_path) values ('1', 'bathroom','bath1.jpg');
-insert into property_images (propertyid, image_decription, image_path) values ('1', 'livingroom','bath2.jpg');
-insert into property_images (propertyid, image_decription, image_path) values ('2', 'outside','room3.jpg');
-insert into property_images (propertyid, image_decription, image_path) values ('2', 'livingroom','room1.jpg');
-insert into property_images (propertyid, image_decription, image_path) values ('2', 'livingroom2','room4.jpg');
+insert into property_images (propertyid, image_path) values ('1','bed1.jpg');
+insert into property_images (propertyid, image_path) values ('1','kit1.jpg');
+insert into property_images (propertyid, image_path) values ('1','bath1.jpg');
+insert into property_images (propertyid, image_path) values ('1','bath2.jpg');
+insert into property_images (propertyid, image_path) values ('2','room3.jpg');
+insert into property_images (propertyid, image_path) values ('2', 'room1.jpg');
+insert into property_images (propertyid, image_path) values ('2', 'room4.jpg');
 
-insert into tenant_details (tenant_firstname, tenant_lastname, tenant_dob, tenant_phone, tenant_email, tenant_postal, tenant_username, tenant_password)  values ('Mike','Kath','1982-10-15','040499999','Chainber@hotmail.com','4068','mkath','pass123');
+insert into tenant_details (tenant_firstname, tenant_lastname, tenant_dob, tenant_phone, tenant_email, tenant_postal, tenant_username, tenant_password)  values ('Mike','Kath','1982-10-15','040499999','Chainber@hotmail.com','4068','mkath', SHA2(CONCAT('pass123',salt),0));
 
 insert into contract_details (propertyid, tenantid, contract_conditions, contract_length, contract_expiry) 
 values (1, 1, 'Testing contract conditions for property1 test1', '12 Months', '6/11/16');
 
-insert into employee_details (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password)  values ('Sam','Gamgee','1970-02-15','040526608','gamgee@hotmail.com','4122','sgamgee','testing1');
+insert into employee_details (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password)  values ('Sam','Gamgee','1970-02-15','040526608','gamgee@hotmail.com','4122','sgamgee',SHA2(CONCAT('testing1', '4b3683669fea3'), 0));
 
-insert into propertyowner_details (propertyowner_firstname, propertyowner_lastname, propertyowner_dob, propertyowner_phone, propertyowner_email, propertyowner_postal, propertyowner_username, propertyowner_password)  values ('Frodo','Baggins','1980-01-01','0423612786','baggins@hotmail.com','4122','fbaggins','testing1');
+insert into propertyowner_details (propertyowner_firstname, propertyowner_lastname, propertyowner_dob, propertyowner_phone, propertyowner_email, propertyowner_postal, propertyowner_username, propertyowner_password)  values ('Frodo','Baggins','1980-01-01','0423612786','baggins@hotmail.com','4122','fbaggins',SHA2(CONCAT('testing1', '4b3683669fea3'), 0));
 
-insert into employee_details (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password, employee_admin)  values ('Admin','Gamgee','1970-02-15','040526608','gamgee@hotmail.com','4122','admin','testing1', TRUE);
+insert into employee_details (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password, employee_admin)  values ('Admin','Gamgee','1970-02-15','040526608','gamgee@hotmail.com','4122','admin',SHA2(CONCAT('testing1','4b3683669fea3'), 0), TRUE);

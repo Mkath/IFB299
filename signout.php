@@ -39,9 +39,10 @@ session_destroy();
 			
 			<?php
 			//displays message that they have signed out.
-			 echo "<p>";
-			 echo "You have successfully signed out.";
-			 echo "</p>";
+			 echo '<script type="text/javascript">
+			 alert("You have successfully signed out.");
+			window.location.href = "signin.php";
+			</script>';
 			?>
 				<br>
 				<br>

@@ -86,7 +86,7 @@
 
         
           $stmt = $conn->prepare("INSERT INTO `employee_details` (employee_firstname, employee_lastname, employee_dob, employee_phone, employee_email, employee_postal, employee_username, employee_password)
-          VALUES (:firstname, :lastname, :dob, :phone, :email, :postal, :username, :password)");
+          VALUES (:firstname, :lastname, :dob, :phone, :email, :postal, :username, SHA2(CONCAT(:password,salt),0))");
           $stmt->bindParam(':firstname', $first_name, PDO::PARAM_STR);
           $stmt->bindParam(':lastname', $last_name, PDO::PARAM_STR);
           $stmt->bindParam(':email', $email, PDO::PARAM_STR);

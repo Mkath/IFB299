@@ -85,7 +85,7 @@ include 'connection.php';
           $postcode = $_POST["postcode"];
 
           $stmt = $conn->prepare("INSERT INTO `propertyowner_details` (propertyowner_firstname, propertyowner_lastname, propertyowner_dob, propertyowner_phone, propertyowner_email, propertyowner_postal, propertyowner_username, propertyowner_password)
-          VALUES (:firstname, :lastname, :dob, :phone, :email, :postal, :username, :password)");
+          VALUES (:firstname, :lastname, :dob, :phone, :email, :postal, :username, SHA2(CONCAT(:password,salt),0))");
           $stmt->bindParam(':firstname', $first_name, PDO::PARAM_STR);
           $stmt->bindParam(':lastname', $last_name, PDO::PARAM_STR);
           $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -96,7 +96,7 @@ include 'connection.php';
           $stmt->bindParam(':postal', $postcode, PDO::PARAM_STR);
           $stmt->execute();
 
-          $stmt = $conn->prepare('SELECT * FROM `propertyowner_details` WHERE `propertyowner_username` = :uname AND `propertyowner_password` = :pword');
+          $stmt = $conn->prepare('SELECT * FROM `propertyowner_details` WHERE `propertyowner_username` = :uname AND `propertyowner_password` = SHA2(CONCAT(:pword,salt),0)');
           $stmt->bindParam(':uname', $username, PDO::PARAM_STR);
           $stmt->bindParam(':pword', $password, PDO::PARAM_STR);
           $stmt->execute();

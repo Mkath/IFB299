@@ -73,7 +73,7 @@ include 'connection.php';
           $postcode = $_POST["postcode"];
 
           $stmt = $conn->prepare("INSERT INTO `tenant_details` (tenant_firstname, tenant_lastname, tenant_dob, tenant_phone, tenant_email, tenant_postal, tenant_username, tenant_password)
-          VALUES (:firstname, :lastname, :dob, :phone, :email, :postal, :username, :password)");
+          VALUES (:firstname, :lastname, :dob, :phone, :email, :postal, :username, SHA2(CONCAT(:password,salt),0))");
           $stmt->bindParam(':firstname', $first_name, PDO::PARAM_STR);
           $stmt->bindParam(':lastname', $last_name, PDO::PARAM_STR);
           $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -84,7 +84,7 @@ include 'connection.php';
           $stmt->bindParam(':postal', $postcode, PDO::PARAM_STR);
           $stmt->execute();
 
-          $stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = :pword');
+          $stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` =  SHA2(CONCAT(:pword,salt),0)');
           $stmt->bindParam(':uname', $username, PDO::PARAM_STR);
           $stmt->bindParam(':pword', $password, PDO::PARAM_STR);
           $stmt->execute();

@@ -34,7 +34,7 @@ include 'connection.php';
 			<div id="secondContent">
         <div id="sign-in">
           <h3>Sign In</h3><br>
-          <form name="signin" onsubmit="return signinvalidate(signin)" action="signin.php" method="GET">
+          <form name="signin" onsubmit="return signinvalidate(signin)" action="signin.php" method="POST">
             <input type="text" name="username" onkeypress="invisible('usernameMissing')" placeholder="Enter Username">
             <br><span id="usernameMissing" style="color:red; visibility:hidden">*'Username' is a required field</span>
             <p>
@@ -56,7 +56,7 @@ include 'connection.php';
 
 
             //this function removes an unwanted characters from the suburb
-            if (isset($_GET['username']) AND isset($_REQUEST['password'])){
+            if (isset($_POST['username']) AND isset($_POST['password'])){
               function validate($field)
               {
               $field = trim($field);
@@ -66,24 +66,25 @@ include 'connection.php';
               }
 
               //The following lines assign variables from the search form to local php variables
-              $user_name = validate($_GET["username"]);
-              $p_word = validate($_GET["password"]);
-			  $login = $_GET["Login_type"];
+              $user_name = validate($_POST["username"]);
+              $p_word = validate($_POST["password"]);
+			  $login = $_POST["Login_type"];
 			 
+			 echo $p_word;
 
               $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 			  if ($login == "Staff")
 			  {
-				$stmt = $conn->prepare('SELECT * FROM `employee_details` WHERE `employee_username` = :uname AND `employee_password` = :pword');
+				$stmt = $conn->prepare('SELECT * FROM `employee_details` WHERE `employee_username` = :uname AND `employee_password` = SHA2(CONCAT(:pword, salt), 0)');
 				
 			  }
 			  elseif ($login == "Owner")
 			  {
-				$stmt = $conn->prepare('SELECT * FROM `propertyowner_details` WHERE `propertyowner_username` = :uname AND `propertyowner_password` = :pword');
+				$stmt = $conn->prepare('SELECT * FROM `propertyowner_details` WHERE `propertyowner_username` = :uname AND `propertyowner_password` = SHA2(CONCAT(:pword, salt), 0)');
 			  }
 			  else
 			  {
-				$stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = :pword');  
+				$stmt = $conn->prepare('SELECT * FROM `tenant_details` WHERE `tenant_username` = :uname AND `tenant_password` = SHA2(CONCAT(:pword, salt), 0)');  
 
 			  }
 			  
