@@ -10,7 +10,7 @@ include 'connection.php';
 
 	
 	//redirect user if they are not the administrator. 
-  if(!isset($_SESSION['e_id']) && ($_SESSION['UserType'] != "Admin")) {
+  if($_SESSION['UserType'] != "Admin") {
     echo '<script type="text/javascript">
     alert("Forbidden");
     window.location.href = "signin.php";

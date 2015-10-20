@@ -1,5 +1,19 @@
 <?php
 include 'connection.php';
+
+	//renew the session
+	if(!isset($_SESSION)){
+    session_start();
+	}
+
+	
+	//redirect user if they are not the administrator. 
+  if(!isset($_SESSION['e_id']) and (!isset($_SESSION['o_id']))) {
+    echo '<script type="text/javascript">
+    alert("Forbidden");
+    window.location.href = "home.php";
+    </script>';
+  }
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
